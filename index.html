@@ -1,0 +1,1311 @@
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo P3C - Crescimento de Caixa</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- VTurb Scripts pre-load -->
+    <script>!function (i, n) { i._plt = i._plt || (n && n.timeOrigin ? n.timeOrigin + n.now() : Date.now()) }(window, performance);</script>
+    <link rel="preload"
+        href="https://scripts.converteai.net/984ee2da-ff8b-43d3-bb35-08ddfd29b995/ab-test/69c709937141a7eb85a56df2/player.js"
+        as="script">
+    <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+    <link rel="dns-prefetch" href="https://cdn.converteai.net">
+    <link rel="dns-prefetch" href="https://scripts.converteai.net">
+    <link rel="dns-prefetch" href="https://images.converteai.net">
+    <link rel="dns-prefetch" href="https://m3u8.vturb.net">
+    <link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+    <style>
+        :root {
+            --bg-deep: #0a1419;
+            --bg-mid: #0d1d24;
+            --bg-soft: #10262f;
+            --bg-card: #122a35;
+            --bg-card-elev: #163240;
+            --accent-primary: #e8b766;
+            --accent-bright: #f0c878;
+            --accent-deep: #a8854a;
+            --cta-green: #3fa860;
+            --cta-green-hover: #4ec272;
+            --cta-green-deep: #2d8048;
+            --cta-text-dark: #0a1f0e;
+            --alert-red: #e05a5a;
+            --alert-red-bg: rgba(224, 90, 90, 0.08);
+            --text-primary: #f0e8d4;
+            --text-headline: #ffffff;
+            --text-secondary: #c8d4bc;
+            --text-muted: #8a9a90;
+            --text-faded: #6a7a72;
+            --border-soft: rgba(232, 183, 102, 0.15);
+            --border-medium: rgba(232, 183, 102, 0.30);
+            --border-strong: rgba(232, 183, 102, 0.50);
+            --divider: rgba(255, 255, 255, 0.08);
+            --banner-lime: #c5e87a;
+            --banner-lime-text: #1a2e0a;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        .animate-pulse-custom {
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+
+        .cta-btn {
+            background-color: var(--cta-green);
+            color: var(--cta-text-dark);
+            box-shadow: 0 0.5rem 1.5rem rgba(63, 168, 96, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-0.125rem);
+            box-shadow: 0 1rem 2.5rem rgba(63, 168, 96, 0.45);
+            background-color: var(--cta-green-hover);
+        }
+
+        .cta-pill {
+            box-shadow: 0 0.75rem 2rem rgba(63, 168, 96, 0.35);
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 25rem;
+            padding-bottom: 1.125rem;
+        }
+
+        .faq-icon {
+            transition: transform 0.35s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .truth-box {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-[var(--bg-deep)] text-[var(--text-primary)] font-inter antialiased selection:bg-[var(--accent-primary)] selection:text-[var(--bg-deep)] m-0 p-0 overflow-x-hidden">
+
+    <!-- SEÇÃO 01 — HERO VSL -->
+    <section class="flex flex-col items-center pt-12 pb-16 px-5 md:px-8 max-w-[45rem] mx-auto w-full relative">
+        <div
+            class="inline-flex items-center gap-2 border border-[var(--border-strong)] rounded-full py-2 px-5 bg-[rgba(232,183,102,0.05)] backdrop-blur-sm">
+            <span class="w-2 h-2 rounded-full bg-[var(--alert-red)] animate-pulse-custom"></span>
+            <span class="text-xs font-bold tracking-[0.1rem] uppercase text-[var(--accent-primary)]">OFERTA POR TEMPO
+                LIMITADO • ÚLTIMAS VAGAS</span>
+        </div>
+        <div class="mt-10 flex flex-col items-center leading-[0.85] text-center">
+            <span
+                class="font-playfair font-semibold tracking-tight text-[clamp(2.5rem,10vw,4.5rem)] text-[var(--accent-primary)]">Protocolo</span>
+            <span
+                class="font-playfair font-medium italic tracking-tight text-[clamp(2.5rem,10vw,4.5rem)] text-[var(--accent-primary)] -mt-1 md:-mt-2">P3C</span>
+        </div>
+
+        <div class="w-full max-w-[40rem] mt-12">
+
+            <div
+                class="border border-[var(--border-medium)] rounded-xl p-4 bg-[rgba(255,255,255,0.03)] shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 pointer-events-none rounded-xl border border-white/5 mix-blend-overlay">
+                </div>
+                <!-- VTurb Embed -->
+                <vturb-smartplayer id="ab-69c709937141a7eb85a56df2"
+                    style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+                <script type="text/javascript">
+                    var s = document.createElement("script");
+                    s.src = "https://scripts.converteai.net/984ee2da-ff8b-43d3-bb35-08ddfd29b995/ab-test/69c709937141a7eb85a56df2/player.js";
+                    s.async = !0;
+                    document.head.appendChild(s);
+                </script>
+            </div>
+
+            <div class="flex justify-center items-center gap-5 mt-4 text-[var(--text-muted)] text-xs">
+                <div class="flex items-center gap-1.5"><iconify-icon icon="solar:volume-loud-linear" stroke-width="1.5"
+                        class="text-base"></iconify-icon> Com som</div>
+                <div class="flex items-center gap-1.5"><iconify-icon icon="solar:smartphone-linear" stroke-width="1.5"
+                        class="text-base"></iconify-icon> Funciona no celular</div>
+                <div class="flex items-center gap-1.5"><iconify-icon icon="solar:stopwatch-linear" stroke-width="1.5"
+                        class="text-base"></iconify-icon> Assista completo</div>
+            </div>
+        </div>
+
+        <p class="text-[0.8125rem] italic text-[var(--text-muted)] mt-4 text-center">↑ Assista o vídeo acima antes de
+            rolar a página.</p>
+
+        <!-- CTA Hero -->
+        <div id="hero-cta" class="w-full flex flex-col items-center mt-10 animate-fade-in">
+            <a href="#oferta"
+                class="cta-btn w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                QUERO BLINDAR MEU CAIXA AGORA!
+            </a>
+            <p class="text-[0.8125rem] text-[var(--text-muted)] mt-3 flex items-center gap-1.5">
+                <iconify-icon icon="solar:bolt-linear" stroke-width="1.5"></iconify-icon> Acesso imediato após a
+                confirmação
+            </p>
+        </div>
+    </section>
+
+    <!-- WRAPPER -->
+    <div id="post-delay-content">
+
+        <!-- SEÇÃO 02 — HEADLINE -->
+        <section class="bg-[var(--bg-deep)] py-16 md:py-20 px-5 md:px-8 flex flex-col items-center text-center">
+            <div class="max-w-[45rem] w-full flex flex-col items-center">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-[1px] w-[3.125rem] bg-[var(--accent-deep)]"></div>
+                    <span class="font-playfair italic text-lg text-[var(--text-secondary)]">2026 chegou</span>
+                    <div class="h-[1px] w-[3.125rem] bg-[var(--accent-deep)]"></div>
+                </div>
+
+                <h1 class="flex flex-col items-center leading-[1.1]">
+                    <span
+                        class="font-playfair font-semibold tracking-tight text-[clamp(1.75rem,6vw,3rem)] text-[var(--text-headline)]">2026
+                        chegou e trouxe com ele a maior seleção natural</span>
+                    <span
+                        class="font-playfair font-semibold italic tracking-tight text-[clamp(1.75rem,6vw,3rem)] text-[var(--accent-primary)] -mt-1 md:-mt-2">da
+                        história do empreendedorismo brasileiro</span>
+                </h1>
+
+                <div class="flex items-center gap-4 my-6">
+                    <div class="h-[1px] w-[3.125rem] bg-[var(--accent-deep)] opacity-50"></div>
+                    <iconify-icon icon="solar:chart-square-linear"
+                        class="text-[var(--accent-deep)] text-xl"></iconify-icon>
+                    <div class="h-[1px] w-[3.125rem] bg-[var(--accent-deep)] opacity-50"></div>
+                </div>
+
+                <p class="text-base text-[var(--text-primary)] leading-[1.75] max-w-[40rem] font-medium">
+                    Enquanto você assiste seus concorrentes fecharem as portas, os grandes players estão rindo. Sabe por
+                    quê? Porque eles não geram vendas, eles geram <strong
+                        class="font-semibold text-[var(--accent-primary)]">caixa blindado</strong>.
+                </p>
+
+                <!-- NOVO: 3-STAT-GRID -->
+
+
+                <a href="#oferta"
+                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                    QUERO BLINDAR MEU CAIXA AGORA!
+                </a>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 03 — DOR -->
+        <section class="bg-[var(--bg-mid)] py-16 md:py-20 px-5 md:px-8 flex flex-col items-center text-center">
+            <div class="max-w-[45rem] w-full flex flex-col items-center">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                    <span class="font-playfair italic text-lg text-[var(--text-secondary)]">O Diagnóstico</span>
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                </div>
+
+                <h2 class="flex flex-col items-center leading-[1.1]">
+                    <span
+                        class="font-playfair font-semibold tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--text-primary)]">O
+                        problema que ninguém quer</span>
+                    <span
+                        class="font-playfair font-semibold italic tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--accent-primary)] -mt-1 md:-mt-2">falar
+                        sobre o seu negócio</span>
+                </h2>
+
+                <div class="h-[1px] w-32 bg-[var(--divider)] my-8"></div>
+
+                <p class="text-base text-[var(--text-secondary)] leading-[1.75] max-w-[40rem]">
+                    Você sente que está sempre correndo atrás do prejuízo? Que o dinheiro entra, mas nunca sobra? A
+                    verdade é que a maioria dos empresários brasileiros está operando com um modelo de gestão de caixa
+                    obsoleto.
+                </p>
+
+                <!-- TRUTH BOX -->
+                <div
+                    class="relative border border-[var(--border-medium)] rounded-xl truth-box px-7 py-8 max-w-[40rem] w-full mt-12 text-left shadow-lg">
+                    <div
+                        class="absolute -top-[0.875rem] left-1/2 -translate-x-1/2 bg-[var(--accent-primary)] text-[var(--bg-deep)] rounded-full px-[1.375rem] py-1.5 text-xs font-bold tracking-[0.125rem] uppercase whitespace-nowrap shadow-md">
+                        O CÂNCER SILENCIOSO
+                    </div>
+                    <p class="text-[0.9375rem] text-[var(--text-primary)] leading-[1.8] m-0">
+                        A falta de uma gestão de caixa eficiente é o <strong
+                            class="font-semibold text-[var(--alert-red)]">câncer silencioso</strong> que consome
+                        empresas por dentro. Enquanto você se preocupa apenas em "vender mais", seus concorrentes mais
+                        astutos estão focados em <em class="font-semibold not-italic text-[var(--accent-primary)]">gerar
+                            caixa blindado</em>.
+                    </p>
+                </div>
+
+                <h3 class="mt-12 text-xs font-bold tracking-[0.125rem] uppercase text-[var(--alert-red)]">
+                    MITOS QUE IMPEDEM SEU CRESCIMENTO
+                </h3>
+
+                <div class="flex flex-col gap-3 max-w-[40rem] w-full mt-6 text-left">
+                    <div
+                        class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
+                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="text-sm text-[var(--text-primary)] font-medium">"Essa falta de crescimento é normal
+                            para pequenos negócios"</span>
+                    </div>
+                    <div
+                        class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
+                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="text-sm text-[var(--text-primary)] font-medium">"Não tenho tempo para isso
+                            agora"</span>
+                    </div>
+                    <div
+                        class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
+                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="text-sm text-[var(--text-primary)] font-medium">"Já tentei com contador, não
+                            funciona"</span>
+                    </div>
+                    <div
+                        class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
+                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="text-sm text-[var(--text-primary)] font-medium">"Não sou bom com números"</span>
+                    </div>
+                    <div
+                        class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
+                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
+                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="text-sm text-[var(--text-primary)] font-medium">"Meu negócio é diferente"</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="bg-[var(--bg-mid)] py-16 md:py-20 px-5 md:px-8 flex flex-col items-center text-center">
+            <div class="max-w-[45rem] w-full flex flex-col items-center">
+
+                <div
+                    class="inline-block border border-[var(--border-strong)] rounded-full py-2 px-[1.375rem] text-[var(--accent-primary)] text-xs font-semibold tracking-[0.125rem] uppercase mb-6 shadow-[0_0_15px_rgba(232,183,102,0.1)]">
+                    A SOLUÇÃO DEFINITIVA
+                </div>
+
+                <h2 class="flex flex-col items-center leading-[1.1]">
+                    <span
+                        class="font-playfair font-semibold tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--text-primary)]">Apresentamos
+                        o</span>
+                    <span
+                        class="font-playfair font-semibold italic tracking-tight text-[clamp(2rem,7vw,3.5rem)] text-[var(--accent-primary)] -mt-1 md:-mt-2">Protocolo
+                        P3C</span>
+                </h2>
+
+                <p class="font-playfair italic text-lg text-[var(--text-secondary)] mt-3">
+                    Protocolo Clínico para Crescimento de Caixa
+                </p>
+
+                <div
+                    class="text-base text-[var(--text-primary)] leading-[1.75] max-w-[40rem] mt-6 font-medium space-y-4">
+                    <p>
+                        Não é mais um curso de finanças. É um <strong
+                            class="font-semibold text-[var(--accent-primary)]">tratamento intensivo</strong> para a
+                        saúde financeira da sua empresa, desenvolvido para diagnosticar, tratar e blindar seu caixa
+                        contra qualquer crise.
+                    </p>
+                    <p>
+                        Com o <strong class="font-semibold text-[var(--accent-primary)]">P3C</strong>, você aprenderá a
+                        transformar suas vendas em <strong class="font-semibold text-[var(--accent-primary)]">lucro
+                            real</strong>, a otimizar seus custos e a criar uma reserva estratégica que garantirá a
+                        longevidade e o crescimento sustentável do seu negócio.
+                    </p>
+                </div>
+
+
+                <div
+                    class="w-full max-w-[40rem] mt-10 text-left bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-xl py-6 px-7 shadow-lg">
+                    <h3 class="font-playfair font-bold text-[1.25rem] text-[#7fc890] mb-5">O QUE VOCÊ VAI
+                        CONSEGUIR:</h3>
+                    <ul class="flex flex-col gap-4">
+                        <li class="flex items-start gap-3">
+                            <iconify-icon icon="solar:check-circle-bold"
+                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Diagnóstico preciso
+                                da saúde financeira</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <iconify-icon icon="solar:check-circle-bold"
+                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Estratégias
+                                comprovadas para otimização de fluxo de caixa</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <iconify-icon icon="solar:check-circle-bold"
+                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Técnicas para
+                                transformar vendas em lucro líquido</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <iconify-icon icon="solar:check-circle-bold"
+                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Criação de um plano
+                                de contingência robusto</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <iconify-icon icon="solar:check-circle-bold"
+                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Acesso a ferramentas
+                                e planilhas exclusivas</span>
+                        </li>
+                    </ul>
+                </div>
+                <div
+                    class="inline-flex items-center gap-2 border border-[rgba(63,168,96,0.5)] rounded-full py-2.5 px-6 bg-[rgba(63,168,96,0.12)] mt-8">
+                    <iconify-icon icon="solar:check-circle-linear" class="text-[#7fc890] text-base"
+                        stroke-width="2"></iconify-icon>
+                    <span class="text-sm font-semibold text-[#7fc890]">Método validado em mais de 20 mil empresas</span>
+                </div>
+
+                <a href="#oferta"
+                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                    QUERO MEU PROTOCOLO P3C AGORA!
+                </a>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 05 — ESPECIALISTA -->
+        <section
+            class="bg-[var(--bg-deep)] max-w-[70rem] mx-auto w-full md:flex border-y border-[var(--divider)] md:min-h-[30rem]">
+            <!-- Photo Col -->
+            <div class="relative w-full md:w-[42%] h-[25rem] md:h-auto overflow-hidden shrink-0">
+                <img src="https://i.imgur.com/M3dXWS5.jpeg" alt="Rodrigo Almeida"
+                    class="w-full h-full object-cover grayscale mix-blend-luminosity opacity-90 transition-all duration-700"
+                    style="object-position: 20% 15%;">
+
+                <!-- Overlay Decorativo -->
+                <div
+                    class="absolute top-6 left-6 w-10 h-10 border-t border-l border-[var(--accent-primary)] opacity-20 pointer-events-none">
+                </div>
+
+                <!-- Mobile Gradient -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-[var(--bg-deep)] via-transparent to-transparent md:hidden">
+                </div>
+
+                <div
+                    class="absolute inset-0 hidden md:block bg-gradient-to-r from-transparent via-transparent to-[var(--bg-deep)]">
+                </div>
+
+                <div class="absolute inset-0 bg-[var(--accent-primary)] mix-blend-overlay opacity-10"></div>
+            </div>
+
+            <!-- Content Col -->
+            <div class="flex-1 px-6 py-10 md:p-12 flex flex-col justify-center">
+
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="h-[1px] w-7 bg-[var(--accent-primary)]"></div>
+                    <span
+                        class="text-[0.625rem] font-medium tracking-[0.125rem] uppercase text-[var(--accent-primary)]">CONHEÇA
+                        O MÉDICO DA SUA EMPRESA</span>
+                </div>
+
+                <div class="leading-none mt-4">
+                    <span
+                        class="block font-playfair font-semibold tracking-tight text-[clamp(2rem,6vw,3.25rem)] text-[var(--text-headline)]">Rodrigo</span>
+                    <span
+                        class="block font-playfair font-semibold italic tracking-tight text-[clamp(2rem,6vw,3.25rem)] text-[var(--accent-primary)] -mt-1">Almeida</span>
+                </div>
+
+                <p class="font-playfair italic text-lg text-[var(--text-secondary)] mt-2">Médico de Empresas há 20+ anos
+                </p>
+
+                <div class="flex flex-wrap gap-2 mt-6">
+                    <span
+                        class="border border-[var(--border-strong)] rounded-full py-1 px-3 text-[0.5625rem] font-bold tracking-[0.075rem] uppercase text-[var(--accent-primary)] bg-[rgba(232,183,102,0.05)]">
+                        ENGENHARIA NAVAL USP
+                    </span>
+                </div>
+
+                <div class="h-[1px] bg-[var(--divider)] w-full my-6"></div>
+
+                <div class="text-sm text-[var(--text-secondary)] leading-[1.75] space-y-3 font-medium">
+                    <p>
+                        Cresceu em comércios com seus pais desde os 6 anos. Viu de perto a luta para gerar resultado.
+                        Entrou em consultoria e percebeu que as estratégias usadas em <strong
+                            class="font-semibold text-[var(--accent-primary)]">grandes empresas</strong> poderiam ser
+                        adaptadas para pequenos negócios.
+                    </p>
+                    <p>
+                        Desde então, ajuda empresários a saírem da <strong
+                            class="font-semibold text-[var(--accent-primary)]">UTI financeira</strong> e prosperarem.
+                    </p>
+                </div>
+
+
+                <h4
+                    class="font-playfair font-bold text-[1rem] text-[var(--accent-primary)] uppercase tracking-wide mt-7 mb-3">
+                    Credenciais:</h4>
+                <ul class="text-[0.875rem] text-[var(--text-primary)] space-y-2 mb-3">
+                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
+                            class="text-[var(--accent-primary)]"></iconify-icon> Ajudou mais de 20 mil empresas em 17
+                        países</li>
+                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
+                            class="text-[var(--accent-primary)]"></iconify-icon> Experiência em diversos setores e
+                        tamanhos de negócio</li>
+                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
+                            class="text-[var(--accent-primary)]"></iconify-icon> Formação em Engenharia Naval (USP)</li>
+                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
+                            class="text-[var(--accent-primary)]"></iconify-icon> Especialista em Consultoria Financeira
+                    </li>
+                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
+                            class="text-[var(--accent-primary)]"></iconify-icon> Criador do Protocolo P3C</li>
+                </ul>
+
+
+            </div>
+        </section>
+
+
+        <section class="bg-[var(--bg-mid)] py-16 md:py-20 px-5 md:px-8 flex flex-col items-center">
+            <div class="max-w-[45rem] w-full flex flex-col items-center">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                    <span class="font-playfair italic text-lg text-[var(--text-secondary)]">Como Funciona</span>
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                </div>
+
+                <h2 class="flex flex-col items-center leading-[1.1] text-center">
+                    <span
+                        class="font-playfair font-semibold tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--text-primary)]">O
+                        que você vai receber</span>
+                    <span
+                        class="font-playfair font-semibold italic tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--accent-primary)] -mt-1 md:-mt-2">no
+                        Protocolo P3C</span>
+                </h2>
+
+                <p class="font-playfair italic text-lg text-[var(--text-secondary)] mt-3 text-center">
+                    Um Tratamento Intensivo em 7 Etapas
+                </p>
+
+                <!-- NOVO: TIMELINE BAR -->
+                <div class="w-full mt-10 mb-2">
+                    <div class="flex items-center gap-3">
+                        <div class="flex-1 h-1.5 rounded-full bg-[var(--alert-red)] opacity-60"></div>
+                        <div class="flex-1 h-1.5 rounded-full bg-[var(--accent-primary)] opacity-60"></div>
+                        <div class="flex-1 h-1.5 rounded-full bg-[var(--cta-green)] opacity-60"></div>
+                    </div>
+                    <div class="flex justify-between items-center mt-2 px-1">
+                        <span
+                            class="text-[0.625rem] font-bold tracking-[0.09375rem] uppercase text-[var(--alert-red)]">EMERGÊNCIA</span>
+                        <span
+                            class="text-[0.625rem] font-bold tracking-[0.09375rem] uppercase text-[var(--accent-primary)]">ESTRUTURA</span>
+                        <span
+                            class="text-[0.625rem] font-bold tracking-[0.09375rem] uppercase text-[var(--cta-green)]">BLINDAGEM</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full mt-6">
+                    <!-- ETAPA 1 (Vermelho) -->
+                    <div
+                        class="bg-[var(--bg-card)] border border-[var(--border-soft)] border-l-[3px] border-l-[var(--alert-red)] rounded-xl pt-[1.375rem] px-[1.125rem] pb-[1.125rem] relative hover:border-[var(--border-medium)] transition-colors shadow-sm mt-3 md:mt-0">
+                        <div
+                            class="absolute top-3 right-4 pointer-events-none select-none font-playfair font-bold text-[3rem] text-[rgba(232,183,102,0.12)] leading-none">
+                            01</div>
+                        <div
+                            class="absolute -top-[1px] left-4 bg-[var(--bg-card-elev)] border border-[var(--border-medium)] border-t-0 rounded-b-[5px] py-1 px-2.5 text-[0.5625rem] tracking-[0.09375rem] text-[var(--alert-red)] uppercase font-bold shadow-sm">
+                            ETAPA 01 • EMERGÊNCIA
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[rgba(224,90,90,0.1)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
+                            <iconify-icon icon="solar:magnifer-linear" stroke-width="1.5"
+                                class="text-lg text-[var(--alert-red)]"></iconify-icon>
+                        </div>
+                        <h4
+                            class="font-playfair font-semibold text-base text-[var(--alert-red)] leading-snug mt-3 tracking-tight">
+                            Diagnóstico Completo</h4>
+                        <div class="h-[1px] bg-[var(--border-soft)] w-full my-2.5"></div>
+                        <p class="text-[0.8125rem] text-[var(--text-secondary)] leading-[1.6]">Raio-X de onde o dinheiro
+                            entra e por que ele some.</p>
+                    </div>
+
+                    <!-- ETAPA 2 (Vermelho) -->
+                    <div
+                        class="bg-[var(--bg-card)] border border-[var(--border-soft)] border-l-[3px] border-l-[var(--alert-red)] rounded-xl pt-[1.375rem] px-[1.125rem] pb-[1.125rem] relative hover:border-[var(--border-medium)] transition-colors shadow-sm mt-3 md:mt-0">
+                        <div
+                            class="absolute top-3 right-4 pointer-events-none select-none font-playfair font-bold text-[3rem] text-[rgba(232,183,102,0.12)] leading-none">
+                            02</div>
+                        <div
+                            class="absolute -top-[1px] left-4 bg-[var(--bg-card-elev)] border border-[var(--border-medium)] border-t-0 rounded-b-[5px] py-1 px-2.5 text-[0.5625rem] tracking-[0.09375rem] text-[var(--alert-red)] uppercase font-bold shadow-sm">
+                            ETAPA 02 • EMERGÊNCIA
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[rgba(224,90,90,0.1)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
+                            <iconify-icon icon="solar:danger-triangle-linear" stroke-width="1.5"
+                                class="text-lg text-[var(--alert-red)]"></iconify-icon>
+                        </div>
+                        <h4
+                            class="font-playfair font-semibold text-base text-[var(--alert-red)] leading-snug mt-3 tracking-tight">
+                            Cirurgia de Emergência</h4>
+                        <div class="h-[1px] bg-[var(--border-soft)] w-full my-2.5"></div>
+                        <p class="text-[0.8125rem] text-[var(--text-secondary)] leading-[1.6]">Corte imediato dos
+                            vazamentos críticos.</p>
+                    </div>
+
+                    <!-- ETAPA 3 (Dourado) -->
+                    <div
+                        class="bg-[var(--bg-card)] border border-[var(--border-soft)] border-l-[3px] border-l-[var(--accent-primary)] rounded-xl pt-[1.375rem] px-[1.125rem] pb-[1.125rem] relative hover:border-[var(--border-medium)] transition-colors shadow-sm mt-3 md:mt-0">
+                        <div
+                            class="absolute top-3 right-4 pointer-events-none select-none font-playfair font-bold text-[3rem] text-[rgba(232,183,102,0.12)] leading-none">
+                            03</div>
+                        <div
+                            class="absolute -top-[1px] left-4 bg-[var(--bg-card-elev)] border border-[var(--border-medium)] border-t-0 rounded-b-[5px] py-1 px-2.5 text-[0.5625rem] tracking-[0.09375rem] text-[var(--accent-primary)] uppercase font-bold shadow-sm">
+                            ETAPA 03 • ESTRUTURA
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[var(--bg-card-elev)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
+                            <iconify-icon icon="solar:city-linear" stroke-width="1.5"
+                                class="text-lg text-[var(--accent-primary)]"></iconify-icon>
+                        </div>
+                        <h4
+                            class="font-playfair font-semibold text-base text-[var(--accent-primary)] leading-snug mt-3 tracking-tight">
+                            Arquitetura do Caixa</h4>
+                        <div class="h-[1px] bg-[var(--border-soft)] w-full my-2.5"></div>
+                        <p class="text-[0.8125rem] text-[var(--text-secondary)] leading-[1.6]">A estrutura para um
+                            crescimento saudável.</p>
+                    </div>
+
+                    <!-- ETAPA 4 (Dourado) -->
+                    <div
+                        class="bg-[var(--bg-card)] border border-[var(--border-soft)] border-l-[3px] border-l-[var(--accent-primary)] rounded-xl pt-[1.375rem] px-[1.125rem] pb-[1.125rem] relative hover:border-[var(--border-medium)] transition-colors shadow-sm mt-3 md:mt-0">
+                        <div
+                            class="absolute top-3 right-4 pointer-events-none select-none font-playfair font-bold text-[3rem] text-[rgba(232,183,102,0.12)] leading-none">
+                            04</div>
+                        <div
+                            class="absolute -top-[1px] left-4 bg-[var(--bg-card-elev)] border border-[var(--border-medium)] border-t-0 rounded-b-[5px] py-1 px-2.5 text-[0.5625rem] tracking-[0.09375rem] text-[var(--accent-primary)] uppercase font-bold shadow-sm">
+                            ETAPA 04 • ESTRUTURA
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[var(--bg-card-elev)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
+                            <iconify-icon icon="solar:shield-check-linear" stroke-width="1.5"
+                                class="text-lg text-[var(--accent-primary)]"></iconify-icon>
+                        </div>
+                        <h4
+                            class="font-playfair font-semibold text-base text-[var(--accent-primary)] leading-snug mt-3 tracking-tight">
+                            Sistema de Imunidade</h4>
+                        <div class="h-[1px] bg-[var(--border-soft)] w-full my-2.5"></div>
+                        <p class="text-[0.8125rem] text-[var(--text-secondary)] leading-[1.6]">Reservas reais para
+                            atravessar qualquer crise.</p>
+                    </div>
+
+                    <!-- ETAPA 5 (Dourado) -->
+                    <div
+                        class="bg-[var(--bg-card)] border border-[var(--border-soft)] border-l-[3px] border-l-[var(--accent-primary)] rounded-xl pt-[1.375rem] px-[1.125rem] pb-[1.125rem] relative hover:border-[var(--border-medium)] transition-colors shadow-sm mt-3 md:mt-0">
+                        <div
+                            class="absolute top-3 right-4 pointer-events-none select-none font-playfair font-bold text-[3rem] text-[rgba(232,183,102,0.12)] leading-none">
+                            05</div>
+                        <div
+                            class="absolute -top-[1px] left-4 bg-[var(--bg-card-elev)] border border-[var(--border-medium)] border-t-0 rounded-b-[5px] py-1 px-2.5 text-[0.5625rem] tracking-[0.09375rem] text-[var(--accent-primary)] uppercase font-bold shadow-sm">
+                            ETAPA 05 • ESTRUTURA
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[var(--bg-card-elev)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
+                            <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5"
+                                class="text-lg text-[var(--accent-primary)]"></iconify-icon>
+                        </div>
+                        <h4
+                            class="font-playfair font-semibold text-base text-[var(--accent-primary)] leading-snug mt-3 tracking-tight">
+                            Motor de Crescimento</h4>
+                        <div class="h-[1px] bg-[var(--border-soft)] w-full my-2.5"></div>
+                        <p class="text-[0.8125rem] text-[var(--text-secondary)] leading-[1.6]">Transforme cada Real
+                            investido em mais retorno.</p>
+                    </div>
+
+                    <!-- ETAPA 6 (Verde) -->
+                    <div
+                        class="bg-[var(--bg-card)] border border-[var(--border-soft)] border-l-[3px] border-l-[var(--cta-green)] rounded-xl pt-[1.375rem] px-[1.125rem] pb-[1.125rem] relative hover:border-[var(--border-medium)] transition-colors shadow-sm mt-3 md:mt-0">
+                        <div
+                            class="absolute top-3 right-4 pointer-events-none select-none font-playfair font-bold text-[3rem] text-[rgba(232,183,102,0.12)] leading-none">
+                            06</div>
+                        <div
+                            class="absolute -top-[1px] left-4 bg-[var(--bg-card-elev)] border border-[var(--border-medium)] border-t-0 rounded-b-[5px] py-1 px-2.5 text-[0.5625rem] tracking-[0.09375rem] text-[#7fc890] uppercase font-bold shadow-sm">
+                            ETAPA 06 • BLINDAGEM
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[rgba(63,168,96,0.1)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
+                            <iconify-icon icon="solar:settings-linear" stroke-width="1.5"
+                                class="text-lg text-[#7fc890]"></iconify-icon>
+                        </div>
+                        <h4
+                            class="font-playfair font-semibold text-base text-[#7fc890] leading-snug mt-3 tracking-tight">
+                            Alavancas de Caixa</h4>
+                        <div class="h-[1px] bg-[var(--border-soft)] w-full my-2.5"></div>
+                        <p class="text-[0.8125rem] text-[var(--text-secondary)] leading-[1.6]">Ajustes práticos de baixo
+                            esforço e alto impacto.</p>
+                    </div>
+
+                    <!-- ETAPA 7 Full Width (Verde) -->
+                    <div
+                        class="md:col-span-2 bg-[var(--bg-card)] border border-[var(--border-soft)] border-l-[3px] border-l-[var(--cta-green)] rounded-xl pt-[1.375rem] px-[1.125rem] pb-[1.125rem] relative hover:border-[var(--border-medium)] transition-colors shadow-sm mt-3 md:mt-0">
+                        <div
+                            class="absolute top-3 right-4 pointer-events-none select-none font-playfair font-bold text-[3rem] text-[rgba(232,183,102,0.12)] leading-none">
+                            07</div>
+                        <div
+                            class="absolute -top-[1px] left-4 bg-[var(--bg-card-elev)] border border-[var(--border-medium)] border-t-0 rounded-b-[5px] py-1 px-2.5 text-[0.5625rem] tracking-[0.09375rem] text-[#7fc890] uppercase font-bold shadow-sm">
+                            ETAPA 07 • BLINDAGEM
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[rgba(63,168,96,0.1)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
+                            <iconify-icon icon="solar:lock-password-linear" stroke-width="1.5"
+                                class="text-lg text-[#7fc890]"></iconify-icon>
+                        </div>
+                        <h4
+                            class="font-playfair font-semibold text-base text-[#7fc890] leading-snug mt-3 tracking-tight">
+                            Blindagem Total</h4>
+                        <div class="h-[1px] bg-[var(--border-soft)] w-full my-2.5"></div>
+                        <p class="text-[0.8125rem] text-[var(--text-secondary)] leading-[1.6]">Preparação definitiva
+                            para o cenário econômico de 2026.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="oferta" class="bg-[var(--bg-soft)] flex flex-col items-center">
+
+            <!-- Top Banner -->
+            <div class="w-full bg-[var(--banner-lime)] py-3.5 px-5 text-center">
+                <span
+                    class="text-xs font-bold tracking-[0.09375rem] uppercase text-[var(--banner-lime-text)] flex items-center justify-center gap-2">
+                    <iconify-icon icon="solar:fire-linear" class="text-sm"></iconify-icon> OFERTA ESPECIAL — 98% DE
+                    DESCONTO • ÚLTIMAS HORAS
+                </span>
+            </div>
+
+            <div class="max-w-[40rem] w-full px-5 md:px-0 py-12 flex flex-col items-center text-center">
+
+                <span class="text-[0.625rem] font-bold tracking-[0.125rem] uppercase text-[#7fc890]">SUA CHANCE DE
+                    BLINDAR O CAIXA</span>
+                <h2
+                    class="font-playfair font-semibold tracking-tight text-[clamp(1.625rem,5.5vw,2.25rem)] text-[var(--text-primary)] mt-3 leading-tight">
+                    Sua chance de blindar o caixa da sua empresa
+                </h2>
+
+
+                <!-- Includes Box -->
+                <div
+                    class="w-full bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] p-5 md:p-6 mt-8 text-left shadow-xl">
+                    <div class="text-center">
+                        <span
+                            class="text-[0.6875rem] font-bold tracking-[0.125rem] uppercase text-[#7fc890]">FERRAMENTAS
+                            EXCLUSIVAS</span>
+                    </div>
+                    <div class="flex flex-col gap-1 mt-5">
+                        <div class="flex items-center gap-3 py-2">
+                            <div
+                                class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
+                                <iconify-icon icon="solar:chart-square-linear"
+                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                            </div>
+                            <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Planilha de Gestão Financeira
+                                Lucrativa</span>
+                        </div>
+                        <div class="flex items-center gap-3 py-2">
+                            <div
+                                class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
+                                <iconify-icon icon="solar:document-text-linear"
+                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                            </div>
+                            <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Templates de gestão
+                                financeira</span>
+                        </div>
+                        <div class="flex items-center gap-3 py-2">
+                            <div
+                                class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
+                                <iconify-icon icon="solar:checklist-linear"
+                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                            </div>
+                            <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Checklists de
+                                implementação</span>
+                        </div>
+                        <div class="flex items-center gap-3 py-2">
+                            <div
+                                class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
+                                <iconify-icon icon="solar:play-circle-linear"
+                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                            </div>
+                            <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Trilha de vídeos passo a
+                                passo</span>
+                        </div>
+                        <div class="flex items-center gap-3 py-2">
+                            <div
+                                class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
+                                <iconify-icon icon="solar:chat-round-dots-linear"
+                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                            </div>
+                            <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Comunidade de apoio com
+                                outros empresários</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div
+                    class="mt-8 text-center bg-[rgba(224,90,90,0.05)] border border-[rgba(224,90,90,0.2)] px-6 py-3 rounded-xl max-w-[40rem] w-full mx-auto">
+                    <p class="text-[0.75rem] font-bold tracking-[0.0625rem] text-[var(--text-secondary)] uppercase">
+                        PREÇO NORMAL (Consultoria Individual):</p>
+                    <p
+                        class="text-[1.125rem] font-playfair font-semibold text-[var(--alert-red)] line-through decoration-2 mt-1">
+                        R$ 15.000 a R$ 50.000</p>
+                </div>
+                <p
+                    class="text-[0.875rem] font-extrabold tracking-[0.0625rem] uppercase text-[var(--accent-primary)] mt-6 text-center">
+                    PREÇO DO PROTOCOLO P3C:</p>
+                <!-- CORREÇÃO: PRICE BOX PROTAGONISTA -->
+                <div
+                    class="w-full bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] p-7 mt-6 text-center shadow-xl relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(232,183,102,0.08)_0%,transparent_70%)] pointer-events-none">
+                    </div>
+
+                    <span
+                        class="block font-inter text-[0.875rem] font-bold tracking-[0.09375rem] uppercase text-[var(--text-secondary)] mb-2">12x
+                        de</span>
+
+                    <div class="flex justify-center items-baseline">
+                        <span
+                            class="font-playfair font-semibold text-[clamp(3.5rem,14vw,6rem)] leading-none text-[var(--accent-primary)] tracking-tight"
+                            style="text-shadow: 0 0 40px rgba(232, 183, 102, 0.25)">R$ 30</span>
+                        <span
+                            class="font-playfair font-semibold text-[clamp(1.5rem,4vw,2.25rem)] text-[var(--accent-primary)] align-super ml-1">,54</span>
+                    </div>
+
+                    <div class="flex items-center gap-4 my-4 justify-center">
+                        <div class="h-[1px] w-8 bg-[var(--divider)]"></div>
+                        <span class="text-xs text-[var(--text-muted)]">OU</span>
+                        <div class="h-[1px] w-8 bg-[var(--divider)]"></div>
+                    </div>
+
+                    <p class="text-base font-semibold text-[var(--text-headline)] mt-3">R$ 297 à vista</p>
+                    <p class="text-xs italic text-[var(--text-secondary)] mt-3">Você economiza mais de 98% do valor de
+                        uma consultoria individual!</p>
+                </div>
+
+                <!-- NOVO: SCARCITY BADGE -->
+                <div
+                    class="inline-flex items-center gap-2 bg-[rgba(224,90,90,0.1)] border border-[rgba(224,90,90,0.3)] rounded-full py-1.5 px-4 mt-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--alert-red)] animate-pulse-custom"></span>
+                    <span
+                        class="text-[0.6875rem] font-extrabold tracking-[0.0625rem] uppercase text-[var(--alert-red)]">RESTAM
+                        POUCAS VAGAS NESTA OFERTA</span>
+                </div>
+
+                <button
+                    class="cta-btn cta-pill w-full rounded-full py-[1.375rem] px-9 mt-4 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide">
+                    QUERO MEU PROTOCOLO P3C AGORA!
+                </button>
+
+                <div
+                    class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 mt-5 text-xs text-[var(--text-muted)] font-medium">
+                    <span class="flex items-center gap-1"><iconify-icon
+                            icon="solar:lock-password-linear"></iconify-icon>
+                        Compra Segura</span>
+                    <span class="text-[var(--divider)]">|</span>
+                    <span class="flex items-center gap-1"><iconify-icon icon="solar:bolt-linear"></iconify-icon> Acesso
+                        Imediato</span>
+                    <span class="text-[var(--divider)]">|</span>
+                    <span class="flex items-center gap-1"><iconify-icon icon="solar:shield-check-linear"></iconify-icon>
+                        7 Dias de Garantia</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO 08 — BÔNUS -->
+        <section class="bg-[var(--bg-deep)] py-16 md:py-20 px-5 md:px-8 flex flex-col items-center">
+            <div class="max-w-[43.75rem] w-full flex flex-col items-center">
+
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                    <span class="font-playfair italic text-lg text-[var(--text-secondary)]">Bônus Exclusivos</span>
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                </div>
+
+                <h2 class="flex flex-col items-center leading-[1.1] text-center">
+                    <span
+                        class="font-playfair font-semibold tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--text-primary)]">Mais
+                        de <strong class="text-[var(--accent-primary)] font-semibold">R$ 15.000</strong> em bônus</span>
+                    <span
+                        class="font-playfair font-semibold italic tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--accent-primary)] -mt-1 md:-mt-2">que
+                        você leva GRÁTIS hoje</span>
+                </h2>
+
+                <p class="text-[0.9375rem] text-[var(--text-secondary)] text-center max-w-[40rem] mt-4">
+                    Valor Total dos Bônus: Mais de R$ 15.000 — Tudo incluído na sua compra
+                </p>
+
+
+                <!-- Bonus Cards -->
+                <div class="w-full max-w-[40rem] mt-10 space-y-4">
+                    <div
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        <div
+                            class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
+                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">RAIO-X
+                                FINANCEIRO</h3>
+                            <p class="text-[0.875rem] text-[var(--text-secondary)] mt-1">Diagnóstico profundo para
+                                identificar seu lucro real e possíveis vazamentos de caixa.</p>
+                            <div class="mt-2 text-[0.8125rem] text-[var(--text-muted)]">Valor Real: R$358 • <strong
+                                    class="font-semibold text-[#7fc890] uppercase">Você leva: GRÁTIS</strong></div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        <div
+                            class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
+                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">KIT
+                                PRIMEIROS SOCORROS FINANCEIROS</h3>
+                            <p class="text-[0.875rem] text-[var(--text-secondary)] mt-1">Ações imediatas para estancar a
+                                perda do seu caixa.</p>
+                            <div class="mt-2 text-[0.8125rem] text-[var(--text-muted)]">Valor Real: R$297 • <strong
+                                    class="font-semibold text-[#7fc890] uppercase">Você leva: GRÁTIS</strong></div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        <div
+                            class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
+                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">ROTINA
+                                SAUDÁVEL DO EMPREENDEDOR</h3>
+                            <p class="text-[0.875rem] text-[var(--text-secondary)] mt-1">Quais são os limites
+                                financeiros que você precisa ter para não sufocar suas finanças?</p>
+                            <div class="mt-2 text-[0.8125rem] text-[var(--text-muted)]">Valor Real: R$197 • <strong
+                                    class="font-semibold text-[#7fc890] uppercase">Você leva: GRÁTIS</strong></div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        <div
+                            class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
+                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">CALCULADORA
+                                DE SOBREVIVÊNCIA</h3>
+                            <p class="text-[0.875rem] text-[var(--text-secondary)] mt-1">Descubra sua reserva de caixa
+                                ideal para manter seu negócio vivo.</p>
+                            <div class="mt-2 text-[0.8125rem] text-[var(--text-muted)]">Valor Real: R$147 • <strong
+                                    class="font-semibold text-[#7fc890] uppercase">Você leva: GRÁTIS</strong></div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        <div
+                            class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
+                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">PLANO
+                                ANTICRISE 2027</h3>
+                            <p class="text-[0.875rem] text-[var(--text-secondary)] mt-1">Blindagem contra IBS e CBS.
+                                Prepare sua empresa para os desafios futuros.</p>
+                            <div class="mt-2 text-[0.8125rem] text-[var(--text-muted)]">Valor Real: R$1.997 • <strong
+                                    class="font-semibold text-[#7fc890] uppercase">Você leva: GRÁTIS</strong></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#oferta"
+                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                    QUERO MEU PROTOCOLO P3C AGORA!
+                </a>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 09 — GARANTIAS -->
+        <section class="bg-[var(--bg-soft)] py-16 md:py-20 px-5 md:px-8 flex flex-col items-center">
+            <div class="max-w-[45rem] w-full flex flex-col items-center">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                    <span class="font-playfair italic text-lg text-[var(--text-secondary)]">Sem Riscos</span>
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                </div>
+
+                <h2 class="flex flex-col items-center leading-[1.1] text-center">
+                    <span
+                        class="font-playfair font-semibold tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--text-primary)]">Sua
+                        decisão é</span>
+                    <span
+                        class="font-playfair font-semibold italic tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--accent-primary)] -mt-1 md:-mt-2">100%
+                        sem riscos</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10 w-full">
+                    <!-- Gar 1 -->
+                    <div
+                        class="bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] py-7 px-5 md:px-6 flex flex-col items-center text-center shadow-md">
+                        <div
+                            class="w-20 h-20 rounded-full bg-[var(--bg-card-elev)] border-2 border-[var(--accent-primary)] flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(232,183,102,0.15)]">
+                            <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
+                                class="text-[2.25rem] text-[var(--accent-primary)]"></iconify-icon>
+                        </div>
+                        <h3 class="font-playfair font-semibold text-lg text-[var(--accent-primary)] mb-2">Garantia
+                            Incondicional de 7 Dias</h3>
+                        <span
+                            class="text-[0.6875rem] font-bold tracking-[0.09375rem] uppercase text-[var(--text-muted)]">RISCO
+                            ZERO</span>
+                        <p class="text-sm text-[var(--text-secondary)] leading-[1.7] mt-4 font-medium">
+                            Se você não gostar das planilhas ou nem da minha voz, a gente devolve <strong
+                                class="font-semibold text-[var(--accent-primary)]">100% do seu dinheiro</strong>. Sem
+                            perguntas. Sem complicações.
+                        </p>
+                    </div>
+
+                    <!-- Gar 2 -->
+                    <div
+                        class="bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] py-7 px-5 md:px-6 flex flex-col items-center text-center shadow-md">
+                        <div
+                            class="w-20 h-20 rounded-full bg-[var(--bg-card-elev)] border-2 border-[var(--accent-primary)] flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(232,183,102,0.15)]">
+                            <iconify-icon icon="solar:chart-2-linear" stroke-width="1.5"
+                                class="text-[2.25rem] text-[var(--accent-primary)]"></iconify-icon>
+                        </div>
+                        <h3 class="font-playfair font-semibold text-lg text-[var(--accent-primary)] mb-2">Garantia de
+                            Resultados</h3>
+                        <span
+                            class="text-[0.6875rem] font-bold tracking-[0.09375rem] uppercase text-[var(--text-muted)]">OU
+                            EU TRABALHO DE GRAÇA</span>
+                        <p class="text-sm text-[var(--text-secondary)] leading-[1.7] mt-4 font-medium">
+                            Aplique o protocolo e não conseguir pelo menos <strong
+                                class="font-semibold text-[var(--accent-primary)]">dobrar seu caixa em 6 meses</strong>?
+                            Eu vou trabalhar com você pessoalmente até atingirmos esse resultado. Ou você lucra, ou eu
+                            trabalho de graça pra você.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 10 — FAQ -->
+        <section class="bg-[var(--bg-deep)] py-16 md:py-20 px-5 md:px-8 flex flex-col items-center">
+            <div class="max-w-[45rem] w-full flex flex-col items-center">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                    <span class="font-playfair italic text-lg text-[var(--text-secondary)]">Perguntas Frequentes</span>
+                    <div class="h-[1px] w-8 bg-[var(--border-strong)]"></div>
+                </div>
+
+                <h2 class="flex flex-col items-center leading-[1.1] text-center">
+                    <span
+                        class="font-playfair font-semibold tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--text-primary)]">Tire
+                        todas</span>
+                    <span
+                        class="font-playfair font-semibold italic tracking-tight text-[clamp(1.625rem,5.5vw,2.625rem)] text-[var(--accent-primary)] -mt-1 md:-mt-2">as
+                        suas dúvidas</span>
+                </h2>
+
+                <div class="w-full flex flex-col gap-3 mt-10">
+
+                    <!-- Q1 -->
+                    <div
+                        class="faq-item active bg-[var(--bg-card)] border border-[var(--border-soft)] rounded-xl overflow-hidden hover:border-[var(--border-medium)] transition-colors">
+                        <div
+                            class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
+                            <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">O Protocolo P3C
+                                serve para qualquer tipo de empresa?</h4>
+                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
+                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                        </div>
+                        <div class="faq-answer px-5 md:px-6">
+                            <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
+                                Sim, funciona para profissional autônomo, loja, indústria. Já testou em centenas de
+                                atividades diferentes para empresas de todos os tamanhos.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Q2 -->
+                    <div
+                        class="faq-item bg-[var(--bg-card)] border border-[var(--border-soft)] rounded-xl overflow-hidden hover:border-[var(--border-medium)] transition-colors mt-3">
+                        <div
+                            class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
+                            <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">Preciso de muito
+                                tempo para aplicar?</h4>
+                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
+                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                        </div>
+                        <div class="faq-answer px-5 md:px-6">
+                            <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
+                                Não. Máximo de 30 a 60 minutos por dia. O foco aqui é na ação, não é na teoria.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Q3 -->
+                    <div
+                        class="faq-item bg-[var(--bg-card)] border border-[var(--border-soft)] rounded-xl overflow-hidden hover:border-[var(--border-medium)] transition-colors mt-3">
+                        <div
+                            class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
+                            <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">E se eu não tiver
+                                capital para investir?</h4>
+                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
+                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                        </div>
+                        <div class="faq-answer px-5 md:px-6">
+                            <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
+                                O protocolo é desenvolvido para a reorganização da sua empresa. Ele vai aproveitar o
+                                poder que já está instalado nela. A maior parte das coisas que você vai fazer, você vai
+                                gastar zero reais.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Q4 -->
+                    <div
+                        class="faq-item bg-[var(--bg-card)] border border-[var(--border-soft)] rounded-xl overflow-hidden hover:border-[var(--border-medium)] transition-colors mt-3">
+                        <div
+                            class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
+                            <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">Quanto tempo leva
+                                para ver os primeiros resultados?</h4>
+                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
+                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                        </div>
+                        <div class="faq-answer px-5 md:px-6">
+                            <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
+                                Muitos alunos relatam melhorias significativas nas primeiras semanas. A garantia de
+                                dobrar o caixa em 6 meses é um testemunho do nosso compromisso com resultados.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Q5 -->
+                    <div
+                        class="faq-item bg-[var(--bg-card)] border border-[var(--border-soft)] rounded-xl overflow-hidden hover:border-[var(--border-medium)] transition-colors mt-3">
+                        <div
+                            class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
+                            <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">O acesso é
+                                vitalício?</h4>
+                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
+                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                        </div>
+                        <div class="faq-answer px-5 md:px-6">
+                            <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
+                                Sim! Uma vez adquirido, você terá acesso vitalício a todo o conteúdo, incluindo futuras
+                                atualizações e bônus adicionais.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <!-- SEÇÃO 11 — FECHAMENTO EMOCIONAL -->
+        <section
+            class="bg-[var(--bg-mid)] py-20 px-5 md:px-8 flex flex-col items-center text-center border-t border-[var(--divider)]">
+            <div class="max-w-[45rem] w-full flex flex-col items-center">
+
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-[1px] w-8 bg-[rgba(224,90,90,0.4)]"></div>
+                    <span class="font-playfair italic text-lg text-[var(--text-secondary)]">A verdade nua e crua</span>
+                    <div class="h-[1px] w-8 bg-[rgba(224,90,90,0.4)]"></div>
+                </div>
+
+                <h2 class="flex flex-col items-center leading-[1.1]">
+                    <span
+                        class="font-playfair font-semibold tracking-tight text-[clamp(1.75rem,6vw,3rem)] text-[var(--text-headline)]">Não
+                        deixe seu negócio</span>
+                    <span
+                        class="font-playfair font-semibold italic tracking-tight text-[clamp(1.75rem,6vw,3rem)] text-[var(--alert-red)] -mt-1 md:-mt-2">à
+                        mercê da sorte</span>
+                </h2>
+
+                <div
+                    class="max-w-[40rem] w-full mt-12 bg-[rgba(224,90,90,0.08)] border border-[rgba(224,90,90,0.3)] rounded-[0.875rem] p-8 text-center transition-all">
+                    <div
+                        class="w-12 h-12 rounded-full bg-[rgba(224,90,90,0.1)] flex items-center justify-center mx-auto mb-6 border border-[rgba(224,90,90,0.2)]">
+                        <iconify-icon icon="solar:danger-triangle-linear"
+                            class="text-2xl text-[var(--alert-red)]"></iconify-icon>
+                    </div>
+                    <h3 class="text-xs font-bold tracking-[0.125rem] uppercase text-[var(--alert-red)] mb-6">
+                        A REALIDADE É DURA
+                    </h3>
+                    <div class="flex flex-col gap-6">
+                        <p class="text-base text-[var(--text-primary)] leading-[1.85] font-medium">
+                            A maioria dos empresários que vão quebrar em 2027 <strong
+                                class="font-semibold text-[#f0a0a0]">já estão quebrados hoje</strong>. Eles só
+                            não sabem ainda.
+                        </p>
+                        <p class="text-base text-[var(--text-primary)] leading-[1.85] font-medium">
+                            Eles operam baseados em <strong class="font-semibold text-[#f0a0a0]">números
+                                falsos</strong>, ilusões contábeis, esperanças vazias.
+                        </p>
+                        <p class="text-base text-[var(--text-primary)] leading-[1.85] font-medium">
+                            Acham que ter dinheiro na conta hoje é sinal de saúde, mas percebem que esse dinheiro já tem
+                            dono: fornecedor, imposto, aluguel, funcionário.
+                        </p>
+                        <p class="text-base text-[var(--text-primary)] leading-[1.85] font-medium">
+                            É como tomar analgésico para um tumor. <em
+                                class="not-italic text-[var(--alert-red)] font-semibold">A dor some, mas o problema
+                                continua
+                                crescendo.</em>
+                        </p>
+                    </div>
+                </div>
+
+
+
+                <div
+                    class="max-w-[40rem] w-full mt-8 bg-[var(--bg-card)] border border-[var(--border-soft)] rounded-[0.875rem] p-8 text-center transition-all">
+                    <div
+                        class="w-12 h-12 rounded-full bg-[rgba(232,183,102,0.1)] flex items-center justify-center mx-auto mb-6 border border-[rgba(232,183,102,0.2)]">
+                        <iconify-icon icon="solar:letter-linear"
+                            class="text-2xl text-[var(--accent-primary)]"></iconify-icon>
+                    </div>
+                    <h3 class="text-xs font-bold tracking-[0.125rem] uppercase text-[var(--accent-primary)] mb-6">
+                        MENSAGEM FINAL
+                    </h3>
+                    <div class="flex flex-col gap-6 text-center">
+
+                        <p class="text-base text-[var(--text-primary)] leading-[1.85] font-medium">
+                            Sua empresa está sangrando e o tempo está passando.
+                        </p>
+                        <p class="text-base text-[var(--text-primary)] leading-[1.85] font-medium">
+                            Você pode ignorar esse aviso e continuar <strong
+                                class="font-semibold text-[var(--accent-primary)]">apagando incêndios</strong> até o
+                            oxigênio acabar.
+                        </p>
+                        <p class="text-base text-[var(--text-primary)] leading-[1.85] font-medium">
+                            Ou pode aplicar o tratamento que já salvou <strong
+                                class="font-semibold text-[var(--accent-primary)]">milhares de empresários</strong> em
+                            diversos países.
+                        </p>
+                        <p class="text-base text-[var(--text-primary)] font-bold mt-4">
+                            O investimento é menor que uma conta de luz, mas o benefício é a vida da sua empresa e da
+                            sua
+                            família.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 max-w-[40rem] w-full mt-10">
+                    <div
+                        class="bg-[var(--bg-card)] border border-[rgba(224,90,90,0.3)] rounded-[0.875rem] py-5 px-5 text-left">
+                        <div
+                            class="w-12 h-12 rounded-full bg-[rgba(224,90,90,0.1)] flex items-center justify-center mb-3 border border-[rgba(224,90,90,0.2)]">
+                            <iconify-icon icon="solar:shop-2-linear" class="text-2xl text-[#e08080]"></iconify-icon>
+                        </div>
+                        <h4 class="font-playfair font-bold text-[1rem] text-[#e08080]">A dona da sorveteria</h4>
+                        <div
+                            class="inline-block bg-[rgba(224,90,90,0.15)] border border-[rgba(224,90,90,0.4)] rounded-full py-1 px-3 mt-2">
+                            <span
+                                class="text-[0.625rem] font-extrabold tracking-[0.0625rem] uppercase text-[var(--alert-red)]">❌
+                                FECHOU AS PORTAS</span>
+                        </div>
+                        <p class="font-inter italic text-[0.8125rem] text-[var(--text-secondary)] leading-[1.65] mt-3">
+                            "Vou começar mês que vem... preciso primeiro vender mais."
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-[var(--bg-card)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] py-5 px-5 text-left">
+                        <span class="text-[2.25rem] leading-none"><iconify-icon icon="solar:confetti-linear"
+                                class="text-[2.25rem] text-[var(--accent-primary)]"></iconify-icon></span>
+                        <h4 class="font-playfair font-bold text-[1rem] text-[var(--accent-primary)] mt-2">A dona
+                            do
+                            buffet</h4>
+                        <div
+                            class="inline-block bg-[rgba(63,168,96,0.15)] border border-[rgba(63,168,96,0.4)] rounded-full py-1 px-3 mt-2">
+                            <span class="text-[0.625rem] font-extrabold tracking-[0.0625rem] uppercase text-[#7fc890]">✓
+                                EXPANDIU O NEGÓCIO</span>
+                        </div>
+                        <p class="font-inter italic text-[0.8125rem] text-[var(--text-primary)] leading-[1.65] mt-3">
+                            "Vou aplicar agora. Crise é onde os fortes ficam mais fortes."
+                        </p>
+                    </div>
+                </div>
+
+                <a href="#oferta"
+                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                    SIM, QUERO BLINDAR MEU CAIXA E PROSPERAR!
+                </a>
+            </div>
+        </section>
+
+        <footer class="bg-[var(--bg-deep)] py-12 px-5 text-center border-t border-[var(--border-soft)] w-full">
+            <p class="text-[0.8125rem] text-[var(--text-muted)] font-medium">© 2026 Protocolo BGO. Todos os direitos
+                reservados.</p>
+            <div class="flex justify-center gap-4 mt-3">
+                <a href="#"
+                    class="text-[0.8125rem] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:underline">Termos
+                    de Uso</a>
+                <span class="text-[var(--border-strong)]">|</span>
+                <a href="#"
+                    class="text-[0.8125rem] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:underline">Política
+                    de Privacidade</a>
+                <span class="text-[var(--border-strong)]">|</span>
+                <a href="#"
+                    class="text-[0.8125rem] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:underline">Contato</a>
+            </div>
+            <p class="text-[0.8125rem] text-[var(--text-muted)] mt-6 flex items-center justify-center">
+                Desenvolvido com <iconify-icon icon="solar:heart-bold"
+                    class="text-[var(--alert-red)] mx-1"></iconify-icon>
+                para salvar empresas brasileiras.
+            </p>
+        </footer>
+    </div>
+    <script>
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isOpen = faqItem.classList.contains('active');
+
+                // Opcional: fechar outros ao abrir um novo
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                if (!isOpen) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
