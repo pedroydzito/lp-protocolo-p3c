@@ -77,13 +77,42 @@
             background-color: var(--cta-green);
             color: var(--cta-text-dark);
             box-shadow: 0 0.5rem 1.5rem rgba(63, 168, 96, 0.25);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            text-align: center;
         }
 
         .cta-btn:hover {
-            transform: translateY(-0.125rem);
+            transform: translateY(-0.125rem) scale(1.02);
             box-shadow: 0 1rem 2.5rem rgba(63, 168, 96, 0.45);
             background-color: var(--cta-green-hover);
+        }
+
+        .cta-btn:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 0.25rem 1rem rgba(63, 168, 96, 0.2);
+        }
+
+        @keyframes pulse-shadow-alert {
+            0%, 100% { box-shadow: 0 0 10px rgba(232, 183, 102, 0.15); }
+            50% { box-shadow: 0 0 25px rgba(232, 183, 102, 0.6); }
+        }
+
+        @keyframes pulse-shadow-red {
+            0%, 100% { box-shadow: 0 0 10px rgba(224, 90, 90, 0.15); }
+            50% { box-shadow: 0 0 25px rgba(224, 90, 90, 0.6); }
+        }
+        .animate-pulse-shadow-red {
+            animation: pulse-shadow-red 2.5s infinite ease-in-out;
+        }\n\n        .animate-pulse-shadow {
+            animation: pulse-shadow-alert 2.5s infinite ease-in-out;
+        }
+
+        .hover-card-anim {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .hover-card-anim:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.2);
         }
 
         .cta-pill {
@@ -133,9 +162,9 @@
     <!-- SEÇÃO 01 — HERO VSL -->
     <section class="flex flex-col items-center pt-12 pb-16 px-5 md:px-8 max-w-[45rem] mx-auto w-full relative">
         <div
-            class="inline-flex items-center gap-2 border border-[var(--border-strong)] rounded-full py-2 px-5 bg-[rgba(232,183,102,0.05)] backdrop-blur-sm">
-            <span class="w-2 h-2 rounded-full bg-[var(--alert-red)] animate-pulse-custom"></span>
-            <span class="text-xs font-bold tracking-[0.1rem] uppercase text-[var(--accent-primary)]">OFERTA POR TEMPO
+            class="inline-flex items-center justify-center text-center gap-2 border border-[var(--border-strong)] rounded-full py-2 px-5 bg-[rgba(232,183,102,0.05)] backdrop-blur-sm animate-pulse-shadow">
+            <span class="w-2 h-2 rounded-full bg-[var(--alert-red)] animate-pulse-custom shrink-0"></span>
+            <span class="text-xs font-bold tracking-[0.1rem] uppercase text-[var(--accent-primary)] text-center">OFERTA POR TEMPO
                 LIMITADO • ÚLTIMAS VAGAS</span>
         </div>
         <div class="mt-10 flex flex-col items-center leading-[0.85] text-center">
@@ -178,7 +207,7 @@
         <!-- CTA Hero -->
         <div id="hero-cta" class="w-full flex flex-col items-center mt-10 animate-fade-in">
             <a href="#oferta"
-                class="cta-btn w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                class="cta-btn w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
                 QUERO BLINDAR MEU CAIXA AGORA!
             </a>
             <p class="text-[0.8125rem] text-[var(--text-muted)] mt-3 flex items-center gap-1.5">
@@ -226,7 +255,7 @@
 
 
                 <a href="#oferta"
-                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
                     QUERO BLINDAR MEU CAIXA AGORA!
                 </a>
             </div>
@@ -400,7 +429,7 @@
                 </div>
 
                 <a href="#oferta"
-                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
                     QUERO MEU PROTOCOLO P3C AGORA!
                 </a>
             </div>
@@ -827,7 +856,7 @@
 
                 <!-- NOVO: SCARCITY BADGE -->
                 <div
-                    class="inline-flex items-center gap-2 bg-[rgba(224,90,90,0.1)] border border-[rgba(224,90,90,0.3)] rounded-full py-1.5 px-4 mt-6">
+                    class="inline-flex items-center gap-2 bg-[rgba(224,90,90,0.1)] border border-[rgba(224,90,90,0.3)] rounded-full py-1.5 px-4 mt-6 animate-pulse-shadow-red text-center justify-center">
                     <span class="w-1.5 h-1.5 rounded-full bg-[var(--alert-red)] animate-pulse-custom"></span>
                     <span
                         class="text-[0.6875rem] font-extrabold tracking-[0.0625rem] uppercase text-[var(--alert-red)]">RESTAM
@@ -835,7 +864,7 @@
                 </div>
 
                 <button
-                    class="cta-btn cta-pill w-full rounded-full py-[1.375rem] px-9 mt-4 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide">
+                    class="cta-btn cta-pill w-full rounded-full py-[1.375rem] px-9 mt-4 flex items-center justify-center text-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide">
                     QUERO MEU PROTOCOLO P3C AGORA!
                 </button>
 
@@ -882,7 +911,7 @@
                 <!-- Bonus Cards -->
                 <div class="w-full max-w-[40rem] mt-10 space-y-4">
                     <div
-                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
                             <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
@@ -897,7 +926,7 @@
                         </div>
                     </div>
                     <div
-                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
                             <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
@@ -912,7 +941,7 @@
                         </div>
                     </div>
                     <div
-                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
                             <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
@@ -927,7 +956,7 @@
                         </div>
                     </div>
                     <div
-                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
                             <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
@@ -942,7 +971,7 @@
                         </div>
                     </div>
                     <div
-                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] transition-all">
+                        class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
                             <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
@@ -958,7 +987,7 @@
                     </div>
                 </div>
                 <a href="#oferta"
-                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
                     QUERO MEU PROTOCOLO P3C AGORA!
                 </a>
             </div>
@@ -985,7 +1014,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10 w-full">
                     <!-- Gar 1 -->
                     <div
-                        class="bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] py-7 px-5 md:px-6 flex flex-col items-center text-center shadow-md">
+                        class="bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] py-7 px-5 md:px-6 flex flex-col items-center text-center shadow-md hover-card-anim">
                         <div
                             class="w-20 h-20 rounded-full bg-[var(--bg-card-elev)] border-2 border-[var(--accent-primary)] flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(232,183,102,0.15)]">
                             <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
@@ -1005,7 +1034,7 @@
 
                     <!-- Gar 2 -->
                     <div
-                        class="bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] py-7 px-5 md:px-6 flex flex-col items-center text-center shadow-md">
+                        class="bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] py-7 px-5 md:px-6 flex flex-col items-center text-center shadow-md hover-card-anim">
                         <div
                             class="w-20 h-20 rounded-full bg-[var(--bg-card-elev)] border-2 border-[var(--accent-primary)] flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(232,183,102,0.15)]">
                             <iconify-icon icon="solar:chart-2-linear" stroke-width="1.5"
@@ -1261,7 +1290,7 @@
                 </div>
 
                 <a href="#oferta"
-                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                    class="cta-btn mt-10 w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
                     SIM, QUERO BLINDAR MEU CAIXA E PROSPERAR!
                 </a>
             </div>
