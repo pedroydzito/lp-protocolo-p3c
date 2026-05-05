@@ -153,7 +153,52 @@
         html {
             scroll-behavior: smooth;
         }
+
+        .esconder {
+            display: none;
+        }
     </style>
+
+    <script>
+        var listPitch = {
+            '69c703e65610b6167ac21ec2': { delay: 428, utm: 'utm_content=vslA' },
+            '69c703895610b6167ac21d99': { delay: 412, utm: 'utm_content=vslB' },
+            '69c7044646ccd0a64582f747': { delay: 419, utm: 'utm_content=vslC' },
+            '69c709937141a7eb85a56df2': { delay: 419, utm: 'utm_content=vslC' }
+        };
+
+        var alreadyInitialized = false;
+
+        var updateLinksWithUTM = function(utmParam) {
+            var links = document.querySelectorAll('a[href]:not([href*="#"])');
+            var separator = '?';
+            var queryString = separator + utmParam;
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i];
+                if (link.href.indexOf(utmParam) !== -1) continue;
+                if (utmParam === undefined) return;
+                var baseUrl = link.href.split('?')[0];
+                link.href = baseUrl + queryString;
+            }
+        };
+
+        document.addEventListener('player:ready', function(event) {
+            if (alreadyInitialized) return;
+
+            var detail = event.detail || {};
+            var config = detail.config || {};
+            var player = detail.player || document.querySelector('vturb-smartplayer');
+            var playerId = config.id;
+            var pitchConfig = listPitch[playerId];
+
+            if (!playerId || !pitchConfig) return;
+
+            alreadyInitialized = true;
+
+            player.displayHiddenElements(pitchConfig.delay, ['.esconder'], { persist: true });
+            //updateLinksWithUTM(pitchConfig.utm);
+        });
+    </script>
 </head>
 
 <body
@@ -201,24 +246,25 @@
             </div>
         </div>
 
-        <p class="text-[0.8125rem] italic text-[var(--text-muted)] mt-4 text-center">↑ Assista o vídeo acima antes de
-            rolar a página.</p>
+
 
         <!-- CTA Hero -->
-        <div id="hero-cta" class="w-full flex flex-col items-center mt-10 animate-fade-in">
-            <a href="#oferta"
-                class="cta-btn w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
-                QUERO BLINDAR MEU CAIXA AGORA!
-            </a>
-            <p class="text-[0.8125rem] text-[var(--text-muted)] mt-3 flex items-center gap-1.5">
-                <iconify-icon icon="solar:bolt-linear" stroke-width="1.5"></iconify-icon> Acesso imediato após a
-                confirmação
-            </p>
+        <div class="esconder w-full mt-10">
+            <div id="hero-cta" class="w-full flex flex-col items-center animate-fade-in">
+                <a href="#oferta"
+                    class="cta-btn w-full max-w-[40rem] rounded-lg py-5 px-8 flex items-center justify-center text-center text-[clamp(0.9375rem,3.5vw,1.125rem)] font-bold uppercase tracking-wide decoration-none">
+                    QUERO BLINDAR MEU CAIXA AGORA!
+                </a>
+                <p class="text-[0.8125rem] text-[var(--text-muted)] mt-3 flex items-center gap-1.5">
+                    <iconify-icon icon="solar:bolt-linear" stroke-width="1.5"></iconify-icon> Acesso imediato após a
+                    confirmação
+                </p>
+            </div>
         </div>
     </section>
 
     <!-- WRAPPER -->
-    <div id="post-delay-content">
+    <div id="post-delay-content" class="esconder">
 
         <!-- SEÇÃO 02 — HEADLINE -->
         <section class="bg-[var(--bg-deep)] py-16 md:py-20 px-5 md:px-8 flex flex-col items-center text-center">
@@ -1300,16 +1346,11 @@
             <p class="text-[0.8125rem] text-[var(--text-muted)] font-medium">© 2026 Protocolo BGO. Todos os direitos
                 reservados.</p>
             <div class="flex justify-center gap-4 mt-3">
-                <a href="#"
-                    class="text-[0.8125rem] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:underline">Termos
-                    de Uso</a>
+                <span class="text-[0.8125rem] text-[var(--text-secondary)]">Termos de Uso</span>
                 <span class="text-[var(--border-strong)]">|</span>
-                <a href="#"
-                    class="text-[0.8125rem] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:underline">Política
-                    de Privacidade</a>
+                <span class="text-[0.8125rem] text-[var(--text-secondary)]">Política de Privacidade</span>
                 <span class="text-[var(--border-strong)]">|</span>
-                <a href="#"
-                    class="text-[0.8125rem] text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:underline">Contato</a>
+                <span class="text-[0.8125rem] text-[var(--text-secondary)]">Contato</span>
             </div>
             <p class="text-[0.8125rem] text-[var(--text-muted)] mt-6 flex items-center justify-center">
                 Desenvolvido com <iconify-icon icon="solar:heart-bold"
