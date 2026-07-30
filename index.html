@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" rel="stylesheet"></noscript>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="output.css">
 
     <!-- VTurb Scripts pre-load -->
     <script>!function (i, n) { i._plt = i._plt || (n && n.timeOrigin ? n.timeOrigin + n.now() : Date.now()) }(window, performance);</script>
@@ -157,6 +157,27 @@
         .esconder {
             display: none;
         }
+
+        /* CLS fix: reservar espaço do player antes de carregar */
+        vturb-smartplayer {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--bg-deep);
+        }
+
+        /* SVG icon helper */
+        .icon-svg {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            vertical-align: middle;
+        }
+        .icon-svg svg {
+            width: 1em;
+            height: 1em;
+        }
     </style>
 
     <script>
@@ -237,12 +258,9 @@
             </div>
 
             <div class="flex justify-center items-center gap-3 md:gap-5 mt-4 text-[var(--text-muted)] text-[10px] sm:text-xs">
-                <div class="flex items-center gap-1 whitespace-nowrap"><iconify-icon icon="solar:volume-loud-linear" stroke-width="1.5"
-                        class="text-base"></iconify-icon> Com som</div>
-                <div class="flex items-center gap-1 whitespace-nowrap"><iconify-icon icon="solar:smartphone-linear" stroke-width="1.5"
-                        class="text-base"></iconify-icon> Funciona no celular</div>
-                <div class="flex items-center gap-1 whitespace-nowrap"><iconify-icon icon="solar:stopwatch-linear" stroke-width="1.5"
-                        class="text-base"></iconify-icon> Assista completo</div>
+                <div class="flex items-center gap-1 whitespace-nowrap"><span class="icon-svg text-base"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.535 10.971c.073-1.208.11-1.813.424-2.394a3.2 3.2 0 0 1 1.38-1.3C3.94 7 4.627 7 6 7c.512 0 .768 0 1.016-.042a3 3 0 0 0 .712-.214c.23-.101.444-.242.871-.524l.22-.144C11.36 4.399 12.632 3.56 13.7 3.925c.205.07.403.17.58.295c.922.648.993 2.157 1.133 5.174A68 68 0 0 1 15.5 12c0 .532-.035 1.488-.087 2.605c-.14 3.018-.21 4.526-1.133 5.175a2.3 2.3 0 0 1-.58.295c-1.067.364-2.339-.474-4.882-2.151L8.6 17.78c-.427-.282-.64-.423-.871-.525a3 3 0 0 0-.712-.213C6.768 17 6.512 17 6 17c-1.374 0-2.06 0-2.66-.277a3.2 3.2 0 0 1-1.381-1.3c-.314-.582-.35-1.186-.424-2.395A17 17 0 0 1 1.5 12c0-.323.013-.671.035-1.029Z"/><path stroke-linecap="round" d="M20 6s1.5 1.8 1.5 6s-1.5 6-1.5 6m-2-9s.5.9.5 3s-.5 3-.5 3"/></g></svg></span> Com som</div>
+                <div class="flex items-center gap-1 whitespace-nowrap"><span class="icon-svg text-base"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10c0-3.771 0-5.657 1.172-6.828S8.229 2 12 2s5.657 0 6.828 1.172S20 6.229 20 10v4c0 3.771 0 5.657-1.172 6.828S15.771 22 12 22s-5.657 0-6.828-1.172S4 17.771 4 14z"/><path stroke-linecap="round" d="M15 19H9"/></g></svg></span> Funciona no celular</div>
+                <div class="flex items-center gap-1 whitespace-nowrap"><span class="icon-svg text-base"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 13a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 13V9"/><path stroke-linecap="round" d="M10 2h4"/></g></svg></span> Assista completo</div>
             </div>
         </div>
 
@@ -256,7 +274,7 @@
                     QUERO BLINDAR MEU CAIXA AGORA!
                 </a>
                 <p class="text-[0.8125rem] text-[var(--text-muted)] mt-3 flex items-center gap-1.5">
-                    <iconify-icon icon="solar:bolt-linear" stroke-width="1.5"></iconify-icon> Acesso imediato após a
+                    <span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="m5.67 9.914l3.062-4.143c1.979-2.678 2.969-4.017 3.892-3.734s.923 1.925.923 5.21v.31c0 1.185 0 1.777.379 2.148l.02.02c.387.363 1.003.363 2.236.363c2.22 0 3.329 0 3.704.673l.018.034c.354.683-.289 1.553-1.574 3.29l-3.062 4.144c-1.98 2.678-2.969 4.017-3.892 3.734s-.923-1.925-.923-5.21v-.31c0-1.185 0-1.777-.379-2.148l-.02-.02c-.387-.363-1.003-.363-2.236-.363c-2.22 0-3.329 0-3.703-.673l-.019-.034c-.354-.683.289-1.552 1.574-3.29Z"/></svg></span> Acesso imediato após a
                     confirmação
                 </p>
             </div>
@@ -286,8 +304,7 @@
 
                 <div class="flex items-center gap-4 my-6">
                     <div class="h-[1px] w-[3.125rem] bg-[var(--accent-deep)] opacity-50"></div>
-                    <iconify-icon icon="solar:chart-square-linear"
-                        class="text-[var(--accent-deep)] text-xl"></iconify-icon>
+                    <span class="icon-svg text-[var(--accent-deep)] text-xl"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" d="M7 18V9m5 9V6m5 12v-5"/></g></svg></span>
                     <div class="h-[1px] w-[3.125rem] bg-[var(--accent-deep)] opacity-50"></div>
                 </div>
 
@@ -356,35 +373,30 @@
                 <div class="flex flex-col gap-3 max-w-[40rem] w-full mt-6 text-left">
                     <div
                         class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
-                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
-                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="icon-svg text-[var(--alert-red)] text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5"/></g></svg></span>
                         <span class="text-sm text-[var(--text-primary)] font-medium">"Essa falta de crescimento é normal
                             para pequenos negócios"</span>
                     </div>
                     <div
                         class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
-                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
-                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="icon-svg text-[var(--alert-red)] text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5"/></g></svg></span>
                         <span class="text-sm text-[var(--text-primary)] font-medium">"Não tenho tempo para isso
                             agora"</span>
                     </div>
                     <div
                         class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
-                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
-                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="icon-svg text-[var(--alert-red)] text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5"/></g></svg></span>
                         <span class="text-sm text-[var(--text-primary)] font-medium">"Já tentei com contador, não
                             funciona"</span>
                     </div>
                     <div
                         class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
-                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
-                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="icon-svg text-[var(--alert-red)] text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5"/></g></svg></span>
                         <span class="text-sm text-[var(--text-primary)] font-medium">"Não sou bom com números"</span>
                     </div>
                     <div
                         class="bg-[var(--alert-red-bg)] border border-[rgba(224,90,90,0.25)] rounded-[0.625rem] py-3.5 px-[1.125rem] flex items-center gap-3">
-                        <iconify-icon icon="solar:close-circle-linear" stroke-width="2"
-                            class="text-[var(--alert-red)] text-base shrink-0"></iconify-icon>
+                        <span class="icon-svg text-[var(--alert-red)] text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5"/></g></svg></span>
                         <span class="text-sm text-[var(--text-primary)] font-medium">"Meu negócio é diferente"</span>
                     </div>
                 </div>
@@ -436,32 +448,27 @@
                         CONSEGUIR:</h3>
                     <ul class="flex flex-col gap-4">
                         <li class="flex items-start gap-3">
-                            <iconify-icon icon="solar:check-circle-bold"
-                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890] mt-0.5 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                             <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Diagnóstico preciso
                                 da saúde financeira</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <iconify-icon icon="solar:check-circle-bold"
-                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890] mt-0.5 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                             <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Estratégias
                                 comprovadas para otimização de fluxo de caixa</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <iconify-icon icon="solar:check-circle-bold"
-                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890] mt-0.5 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                             <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Técnicas para
                                 transformar vendas em lucro líquido</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <iconify-icon icon="solar:check-circle-bold"
-                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890] mt-0.5 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                             <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Criação de um plano
                                 de contingência robusto</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <iconify-icon icon="solar:check-circle-bold"
-                                class="text-xl text-[#7fc890] mt-0.5 shrink-0"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890] mt-0.5 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                             <span class="text-[0.9375rem] text-[var(--text-primary)] leading-tight">Acesso a ferramentas
                                 e planilhas exclusivas</span>
                         </li>
@@ -469,8 +476,7 @@
                 </div>
                 <div
                     class="inline-flex items-center gap-2 border border-[rgba(63,168,96,0.5)] rounded-full py-2.5 px-6 bg-[rgba(63,168,96,0.12)] mt-8">
-                    <iconify-icon icon="solar:check-circle-linear" class="text-[#7fc890] text-base"
-                        stroke-width="2"></iconify-icon>
+                    <span class="icon-svg text-[#7fc890] text-base"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="m8.5 12.5l2 2l5-5"/></g></svg></span>
                     <span class="text-sm font-semibold text-[#7fc890]">Método validado em mais de 20 mil empresas</span>
                 </div>
 
@@ -487,6 +493,7 @@
             <!-- Photo Col -->
             <div class="relative w-full md:w-[42%] h-[25rem] md:h-auto overflow-hidden shrink-0">
                 <img src="https://i.imgur.com/M3dXWS5.jpeg" alt="Rodrigo Almeida"
+                    loading="lazy" decoding="async" width="600" height="750"
                     class="w-full h-full object-cover grayscale mix-blend-luminosity opacity-90 transition-all duration-700"
                     style="object-position: 20% 15%;">
 
@@ -554,19 +561,14 @@
                     class="font-playfair font-bold text-[1rem] text-[var(--accent-primary)] uppercase tracking-wide mt-7 mb-3">
                     Credenciais:</h4>
                 <ul class="text-[0.875rem] text-[var(--text-primary)] space-y-2 mb-3">
-                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
-                            class="text-[var(--accent-primary)]"></iconify-icon> Ajudou mais de 20 mil empresas em 17
+                    <li class="flex gap-2 items-center"><span class="icon-svg text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M9.153 5.408C10.42 3.136 11.053 2 12 2s1.58 1.136 2.847 3.408l.328.588c.36.646.54.969.82 1.182s.63.292 1.33.45l.636.144c2.46.557 3.689.835 3.982 1.776c.292.94-.546 1.921-2.223 3.882l-.434.507c-.476.557-.715.836-.822 1.18c-.107.345-.071.717.001 1.46l.066.677c.253 2.617.38 3.925-.386 4.506s-1.918.051-4.22-1.009l-.597-.274c-.654-.302-.981-.452-1.328-.452s-.674.15-1.328.452l-.596.274c-2.303 1.06-3.455 1.59-4.22 1.01c-.767-.582-.64-1.89-.387-4.507l.066-.676c.072-.744.108-1.116 0-1.46c-.106-.345-.345-.624-.821-1.18l-.434-.508c-1.677-1.96-2.515-2.941-2.223-3.882S3.58 8.328 6.04 7.772l.636-.144c.699-.158 1.048-.237 1.329-.45s.46-.536.82-1.182z"/></svg></span> Ajudou mais de 20 mil empresas em 17
                         países</li>
-                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
-                            class="text-[var(--accent-primary)]"></iconify-icon> Experiência em diversos setores e
+                    <li class="flex gap-2 items-center"><span class="icon-svg text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M9.153 5.408C10.42 3.136 11.053 2 12 2s1.58 1.136 2.847 3.408l.328.588c.36.646.54.969.82 1.182s.63.292 1.33.45l.636.144c2.46.557 3.689.835 3.982 1.776c.292.94-.546 1.921-2.223 3.882l-.434.507c-.476.557-.715.836-.822 1.18c-.107.345-.071.717.001 1.46l.066.677c.253 2.617.38 3.925-.386 4.506s-1.918.051-4.22-1.009l-.597-.274c-.654-.302-.981-.452-1.328-.452s-.674.15-1.328.452l-.596.274c-2.303 1.06-3.455 1.59-4.22 1.01c-.767-.582-.64-1.89-.387-4.507l.066-.676c.072-.744.108-1.116 0-1.46c-.106-.345-.345-.624-.821-1.18l-.434-.508c-1.677-1.96-2.515-2.941-2.223-3.882S3.58 8.328 6.04 7.772l.636-.144c.699-.158 1.048-.237 1.329-.45s.46-.536.82-1.182z"/></svg></span> Experiência em diversos setores e
                         tamanhos de negócio</li>
-                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
-                            class="text-[var(--accent-primary)]"></iconify-icon> Formação em Engenharia Naval (USP)</li>
-                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
-                            class="text-[var(--accent-primary)]"></iconify-icon> Especialista em Consultoria Financeira
+                    <li class="flex gap-2 items-center"><span class="icon-svg text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M9.153 5.408C10.42 3.136 11.053 2 12 2s1.58 1.136 2.847 3.408l.328.588c.36.646.54.969.82 1.182s.63.292 1.33.45l.636.144c2.46.557 3.689.835 3.982 1.776c.292.94-.546 1.921-2.223 3.882l-.434.507c-.476.557-.715.836-.822 1.18c-.107.345-.071.717.001 1.46l.066.677c.253 2.617.38 3.925-.386 4.506s-1.918.051-4.22-1.009l-.597-.274c-.654-.302-.981-.452-1.328-.452s-.674.15-1.328.452l-.596.274c-2.303 1.06-3.455 1.59-4.22 1.01c-.767-.582-.64-1.89-.387-4.507l.066-.676c.072-.744.108-1.116 0-1.46c-.106-.345-.345-.624-.821-1.18l-.434-.508c-1.677-1.96-2.515-2.941-2.223-3.882S3.58 8.328 6.04 7.772l.636-.144c.699-.158 1.048-.237 1.329-.45s.46-.536.82-1.182z"/></svg></span> Formação em Engenharia Naval (USP)</li>
+                    <li class="flex gap-2 items-center"><span class="icon-svg text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M9.153 5.408C10.42 3.136 11.053 2 12 2s1.58 1.136 2.847 3.408l.328.588c.36.646.54.969.82 1.182s.63.292 1.33.45l.636.144c2.46.557 3.689.835 3.982 1.776c.292.94-.546 1.921-2.223 3.882l-.434.507c-.476.557-.715.836-.822 1.18c-.107.345-.071.717.001 1.46l.066.677c.253 2.617.38 3.925-.386 4.506s-1.918.051-4.22-1.009l-.597-.274c-.654-.302-.981-.452-1.328-.452s-.674.15-1.328.452l-.596.274c-2.303 1.06-3.455 1.59-4.22 1.01c-.767-.582-.64-1.89-.387-4.507l.066-.676c.072-.744.108-1.116 0-1.46c-.106-.345-.345-.624-.821-1.18l-.434-.508c-1.677-1.96-2.515-2.941-2.223-3.882S3.58 8.328 6.04 7.772l.636-.144c.699-.158 1.048-.237 1.329-.45s.46-.536.82-1.182z"/></svg></span> Especialista em Consultoria Financeira
                     </li>
-                    <li class="flex gap-2 items-center"><iconify-icon icon="solar:star-linear"
-                            class="text-[var(--accent-primary)]"></iconify-icon> Criador do Protocolo P3C</li>
+                    <li class="flex gap-2 items-center"><span class="icon-svg text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M9.153 5.408C10.42 3.136 11.053 2 12 2s1.58 1.136 2.847 3.408l.328.588c.36.646.54.969.82 1.182s.63.292 1.33.45l.636.144c2.46.557 3.689.835 3.982 1.776c.292.94-.546 1.921-2.223 3.882l-.434.507c-.476.557-.715.836-.822 1.18c-.107.345-.071.717.001 1.46l.066.677c.253 2.617.38 3.925-.386 4.506s-1.918.051-4.22-1.009l-.597-.274c-.654-.302-.981-.452-1.328-.452s-.674.15-1.328.452l-.596.274c-2.303 1.06-3.455 1.59-4.22 1.01c-.767-.582-.64-1.89-.387-4.507l.066-.676c.072-.744.108-1.116 0-1.46c-.106-.345-.345-.624-.821-1.18l-.434-.508c-1.677-1.96-2.515-2.941-2.223-3.882S3.58 8.328 6.04 7.772l.636-.144c.699-.158 1.048-.237 1.329-.45s.46-.536.82-1.182z"/></svg></span> Criador do Protocolo P3C</li>
                 </ul>
 
 
@@ -625,8 +627,7 @@
                         </div>
                         <div
                             class="w-10 h-10 rounded-full bg-[rgba(224,90,90,0.1)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
-                            <iconify-icon icon="solar:magnifer-linear" stroke-width="1.5"
-                                class="text-lg text-[var(--alert-red)]"></iconify-icon>
+                            <span class="icon-svg text-lg text-[var(--alert-red)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11.5" cy="11.5" r="9.5"/><path stroke-linecap="round" d="M18.5 18.5L22 22"/></g></svg></span>
                         </div>
                         <h4
                             class="font-playfair font-semibold text-base text-[var(--alert-red)] leading-snug mt-3 tracking-tight">
@@ -648,8 +649,7 @@
                         </div>
                         <div
                             class="w-10 h-10 rounded-full bg-[rgba(224,90,90,0.1)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
-                            <iconify-icon icon="solar:danger-triangle-linear" stroke-width="1.5"
-                                class="text-lg text-[var(--alert-red)]"></iconify-icon>
+                            <span class="icon-svg text-lg text-[var(--alert-red)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"><path stroke="currentColor" stroke-width="1.5" d="M5.312 10.762C8.23 5.587 9.689 3 12 3s3.77 2.587 6.688 7.762l.364.644c2.425 4.3 3.638 6.45 2.542 8.022S17.786 21 12.364 21h-.728c-5.422 0-8.134 0-9.23-1.572s.117-3.722 2.542-8.022z"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M12 8v5"/><circle cx="12" cy="16" r="1" fill="currentColor"/></g></svg></span>
                         </div>
                         <h4
                             class="font-playfair font-semibold text-base text-[var(--alert-red)] leading-snug mt-3 tracking-tight">
@@ -671,8 +671,7 @@
                         </div>
                         <div
                             class="w-10 h-10 rounded-full bg-[var(--bg-card-elev)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
-                            <iconify-icon icon="solar:city-linear" stroke-width="1.5"
-                                class="text-lg text-[var(--accent-primary)]"></iconify-icon>
+                            <span class="icon-svg text-lg text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 22V12c0-1.886 0-2.828.586-3.414S5.114 8 7 8s2.828 0 3.414.586S11 10.114 11 12"/><path d="M17 22v-6c0-1.886 0-2.828-.586-3.414S14.886 12 13 12h-2c-1.886 0-2.828 0-3.414.586S7 14.114 7 16v6"/><path d="M21 22V7.772c0-1.34 0-2.011-.356-2.525s-.984-.75-2.24-1.22c-2.455-.921-3.682-1.381-4.543-.785C13 3.84 13 5.15 13 7.772V12"/><path stroke-linecap="round" d="M4 8V6.5c0-.943 0-1.414.293-1.707S5.057 4.5 6 4.5h2c.943 0 1.414 0 1.707.293S10 5.557 10 6.5V8M7 4V2m15 20H2m8-7h4m-4 3h4"/></g></svg></span>
                         </div>
                         <h4
                             class="font-playfair font-semibold text-base text-[var(--accent-primary)] leading-snug mt-3 tracking-tight">
@@ -694,8 +693,7 @@
                         </div>
                         <div
                             class="w-10 h-10 rounded-full bg-[var(--bg-card-elev)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
-                            <iconify-icon icon="solar:shield-check-linear" stroke-width="1.5"
-                                class="text-lg text-[var(--accent-primary)]"></iconify-icon>
+                            <span class="icon-svg text-lg text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10.417c0-3.198 0-4.797.378-5.335c.377-.537 1.88-1.052 4.887-2.081l.573-.196C10.405 2.268 11.188 2 12 2s1.595.268 3.162.805l.573.196c3.007 1.029 4.51 1.544 4.887 2.081C21 5.62 21 7.22 21 10.417v1.574c0 5.638-4.239 8.375-6.899 9.536C13.38 21.842 13.02 22 12 22s-1.38-.158-2.101-.473C7.239 20.365 3 17.63 3 11.991z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9.5 12.4l1.429 1.6l3.571-4"/></g></svg></span>
                         </div>
                         <h4
                             class="font-playfair font-semibold text-base text-[var(--accent-primary)] leading-snug mt-3 tracking-tight">
@@ -717,8 +715,7 @@
                         </div>
                         <div
                             class="w-10 h-10 rounded-full bg-[var(--bg-card-elev)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
-                            <iconify-icon icon="solar:chart-square-linear" stroke-width="1.5"
-                                class="text-lg text-[var(--accent-primary)]"></iconify-icon>
+                            <span class="icon-svg text-lg text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" d="M7 18V9m5 9V6m5 12v-5"/></g></svg></span>
                         </div>
                         <h4
                             class="font-playfair font-semibold text-base text-[var(--accent-primary)] leading-snug mt-3 tracking-tight">
@@ -740,8 +737,7 @@
                         </div>
                         <div
                             class="w-10 h-10 rounded-full bg-[rgba(63,168,96,0.1)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
-                            <iconify-icon icon="solar:settings-linear" stroke-width="1.5"
-                                class="text-lg text-[#7fc890]"></iconify-icon>
+                            <span class="icon-svg text-lg text-[#7fc890]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M13.765 2.152C13.398 2 12.932 2 12 2s-1.398 0-1.765.152a2 2 0 0 0-1.083 1.083c-.092.223-.129.484-.143.863a1.62 1.62 0 0 1-.79 1.353a1.62 1.62 0 0 1-1.567.008c-.336-.178-.579-.276-.82-.308a2 2 0 0 0-1.478.396C4.04 5.79 3.806 6.193 3.34 7s-.7 1.21-.751 1.605a2 2 0 0 0 .396 1.479c.148.192.355.353.676.555c.473.297.777.803.777 1.361s-.304 1.064-.777 1.36c-.321.203-.529.364-.676.556a2 2 0 0 0-.396 1.479c.052.394.285.798.75 1.605c.467.807.7 1.21 1.015 1.453a2 2 0 0 0 1.479.396c.24-.032.483-.13.819-.308a1.62 1.62 0 0 1 1.567.008c.483.28.77.795.79 1.353c.014.38.05.64.143.863a2 2 0 0 0 1.083 1.083C10.602 22 11.068 22 12 22s1.398 0 1.765-.152a2 2 0 0 0 1.083-1.083c.092-.223.129-.483.143-.863c.02-.558.307-1.074.79-1.353a1.62 1.62 0 0 1 1.567-.008c.336.178.579.276.819.308a2 2 0 0 0 1.479-.396c.315-.242.548-.646 1.014-1.453s.7-1.21.751-1.605a2 2 0 0 0-.396-1.479c-.148-.192-.355-.353-.676-.555A1.62 1.62 0 0 1 19.562 12c0-.558.304-1.064.777-1.36c.321-.203.529-.364.676-.556a2 2 0 0 0 .396-1.479c-.052-.394-.285-.798-.75-1.605c-.467-.807-.7-1.21-1.015-1.453a2 2 0 0 0-1.479-.396c-.24.032-.483.13-.82.308a1.62 1.62 0 0 1-1.566-.008a1.62 1.62 0 0 1-.79-1.353c-.014-.38-.05-.64-.143-.863a2 2 0 0 0-1.083-1.083Z"/></g></svg></span>
                         </div>
                         <h4
                             class="font-playfair font-semibold text-base text-[#7fc890] leading-snug mt-3 tracking-tight">
@@ -763,8 +759,7 @@
                         </div>
                         <div
                             class="w-10 h-10 rounded-full bg-[rgba(63,168,96,0.1)] flex items-center justify-center mt-2 border border-[var(--border-soft)]">
-                            <iconify-icon icon="solar:lock-password-linear" stroke-width="1.5"
-                                class="text-lg text-[#7fc890]"></iconify-icon>
+                            <span class="icon-svg text-lg text-[#7fc890]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path stroke-width="1.5" d="M2 16c0-2.828 0-4.243.879-5.121C3.757 10 5.172 10 8 10h8c2.828 0 4.243 0 5.121.879C22 11.757 22 13.172 22 16s0 4.243-.879 5.121C20.243 22 18.828 22 16 22H8c-2.828 0-4.243 0-5.121-.879C2 20.243 2 18.828 2 16Z"/><path stroke-linecap="round" stroke-width="1.5" d="M6 10V8a6 6 0 1 1 12 0v2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h.009m3.982 0H12m3.991 0H16"/></g></svg></span>
                         </div>
                         <h4
                             class="font-playfair font-semibold text-base text-[#7fc890] leading-snug mt-3 tracking-tight">
@@ -785,7 +780,7 @@
             <div class="w-full bg-[var(--banner-lime)] py-3.5 px-5 text-center">
                 <span
                     class="text-xs font-bold tracking-[0.09375rem] uppercase text-[var(--banner-lime-text)] flex items-center justify-center gap-2">
-                    <iconify-icon icon="solar:fire-linear" class="text-sm"></iconify-icon> OFERTA ESPECIAL — 98% DE
+                    <span class="icon-svg text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 13.111C20 20.222 13.956 22 10.933 22C8.29 22 3 20.222 3 13.111c0-2.782 1.461-4.65 2.86-5.716c.778-.594 1.77-.003 1.87.971l.086.838c.105 1.02 1.033 1.857 1.893 1.298C11.394 9.407 12 6.775 12 5.333V5.01c0-1.43 1.444-2.35 2.602-1.512C17.165 5.35 20 8.584 20 13.11Z"/><path d="M8 18.445C8 21.289 10.489 22 11.733 22c1.09 0 3.267-.711 3.267-3.555c0-1.102-.59-1.845-1.16-2.274c-.398-.299-.957-.03-1.094.449c-.178.624-.823 1.016-1.152.456c-.3-.512-.3-1.28-.3-1.743c0-.636-.64-1.048-1.155-.674C9.106 15.409 8 16.68 8 18.445Z"/></g></svg></span> OFERTA ESPECIAL — 98% DE
                     DESCONTO • ÚLTIMAS HORAS
                 </span>
             </div>
@@ -812,8 +807,7 @@
                         <div class="flex items-center gap-3 py-2">
                             <div
                                 class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
-                                <iconify-icon icon="solar:chart-square-linear"
-                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                                <span class="icon-svg text-[#7fc890] text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" d="M7 18V9m5 9V6m5 12v-5"/></g></svg></span>
                             </div>
                             <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Planilha de Gestão Financeira
                                 Lucrativa</span>
@@ -821,8 +815,7 @@
                         <div class="flex items-center gap-3 py-2">
                             <div
                                 class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
-                                <iconify-icon icon="solar:document-text-linear"
-                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                                <span class="icon-svg text-[#7fc890] text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10c0-3.771 0-5.657 1.172-6.828S7.229 2 11 2h2c3.771 0 5.657 0 6.828 1.172S21 6.229 21 10v4c0 3.771 0 5.657-1.172 6.828S16.771 22 13 22h-2c-3.771 0-5.657 0-6.828-1.172S3 17.771 3 14z"/><path stroke-linecap="round" d="M8 12h8M8 8h8m-8 8h5"/></g></svg></span>
                             </div>
                             <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Templates de gestão
                                 financeira</span>
@@ -830,8 +823,7 @@
                         <div class="flex items-center gap-3 py-2">
                             <div
                                 class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
-                                <iconify-icon icon="solar:checklist-linear"
-                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                                <span class="icon-svg text-[#7fc890] text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="M2 5.5L3.214 7L7.5 3M2 12.5L3.214 14L7.5 10M2 19.5L3.214 21L7.5 17"/><path d="M22 19H12m10-7H12m10-7H12"/></g></svg></span>
                             </div>
                             <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Checklists de
                                 implementação</span>
@@ -839,8 +831,7 @@
                         <div class="flex items-center gap-3 py-2">
                             <div
                                 class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
-                                <iconify-icon icon="solar:play-circle-linear"
-                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                                <span class="icon-svg text-[#7fc890] text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M15.414 10.941c.781.462.781 1.656 0 2.118l-4.72 2.787C9.934 16.294 9 15.71 9 14.786V9.214c0-.924.934-1.507 1.694-1.059z"/></g></svg></span>
                             </div>
                             <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Trilha de vídeos passo a
                                 passo</span>
@@ -848,8 +839,7 @@
                         <div class="flex items-center gap-3 py-2">
                             <div
                                 class="w-6 h-6 rounded-full bg-[rgba(63,168,96,0.15)] flex items-center justify-center shrink-0">
-                                <iconify-icon icon="solar:chat-round-dots-linear"
-                                    class="text-[#7fc890] text-sm"></iconify-icon>
+                                <span class="icon-svg text-[#7fc890] text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.009m3.982 0H12m3.991 0H16"/><path stroke-width="1.5" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22Z"/></g></svg></span>
                             </div>
                             <span class="text-sm text-[var(--text-primary)] leading-[1.5]">Comunidade de apoio com
                                 outros empresários</span>
@@ -916,14 +906,13 @@
 
                 <div
                     class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 mt-5 text-xs text-[var(--text-muted)] font-medium">
-                    <span class="flex items-center gap-1"><iconify-icon
-                            icon="solar:lock-password-linear"></iconify-icon>
+                    <span class="flex items-center gap-1"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path stroke-width="1.5" d="M2 16c0-2.828 0-4.243.879-5.121C3.757 10 5.172 10 8 10h8c2.828 0 4.243 0 5.121.879C22 11.757 22 13.172 22 16s0 4.243-.879 5.121C20.243 22 18.828 22 16 22H8c-2.828 0-4.243 0-5.121-.879C2 20.243 2 18.828 2 16Z"/><path stroke-linecap="round" stroke-width="1.5" d="M6 10V8a6 6 0 1 1 12 0v2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h.009m3.982 0H12m3.991 0H16"/></g></svg></span>
                         Compra Segura</span>
                     <span class="text-[var(--divider)]">|</span>
-                    <span class="flex items-center gap-1"><iconify-icon icon="solar:bolt-linear"></iconify-icon> Acesso
+                    <span class="flex items-center gap-1"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="m5.67 9.914l3.062-4.143c1.979-2.678 2.969-4.017 3.892-3.734s.923 1.925.923 5.21v.31c0 1.185 0 1.777.379 2.148l.02.02c.387.363 1.003.363 2.236.363c2.22 0 3.329 0 3.704.673l.018.034c.354.683-.289 1.553-1.574 3.29l-3.062 4.144c-1.98 2.678-2.969 4.017-3.892 3.734s-.923-1.925-.923-5.21v-.31c0-1.185 0-1.777-.379-2.148l-.02-.02c-.387-.363-1.003-.363-2.236-.363c-2.22 0-3.329 0-3.703-.673l-.019-.034c-.354-.683.289-1.552 1.574-3.29Z"/></svg></span> Acesso
                         Imediato</span>
                     <span class="text-[var(--divider)]">|</span>
-                    <span class="flex items-center gap-1"><iconify-icon icon="solar:shield-check-linear"></iconify-icon>
+                    <span class="flex items-center gap-1"><span class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10.417c0-3.198 0-4.797.378-5.335c.377-.537 1.88-1.052 4.887-2.081l.573-.196C10.405 2.268 11.188 2 12 2s1.595.268 3.162.805l.573.196c3.007 1.029 4.51 1.544 4.887 2.081C21 5.62 21 7.22 21 10.417v1.574c0 5.638-4.239 8.375-6.899 9.536C13.38 21.842 13.02 22 12 22s-1.38-.158-2.101-.473C7.239 20.365 3 17.63 3 11.991z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9.5 12.4l1.429 1.6l3.571-4"/></g></svg></span>
                         7 Dias de Garantia</span>
                 </div>
 
@@ -960,7 +949,7 @@
                         class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
-                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                         </div>
                         <div class="flex-1">
                             <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">RAIO-X
@@ -975,7 +964,7 @@
                         class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
-                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                         </div>
                         <div class="flex-1">
                             <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">KIT
@@ -990,7 +979,7 @@
                         class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
-                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                         </div>
                         <div class="flex-1">
                             <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">ROTINA
@@ -1005,7 +994,7 @@
                         class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
-                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                         </div>
                         <div class="flex-1">
                             <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">CALCULADORA
@@ -1020,7 +1009,7 @@
                         class="bg-[rgba(63,168,96,0.08)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] p-5 flex flex-col md:flex-row items-start md:items-center gap-4 text-left shadow-sm hover:border-[rgba(63,168,96,0.5)] hover-card-anim">
                         <div
                             class="w-14 h-14 rounded-full bg-[rgba(63,168,96,0.1)] border border-[rgba(63,168,96,0.3)] flex items-center justify-center shrink-0">
-                            <iconify-icon icon="solar:check-circle-bold" class="text-xl text-[#7fc890]"></iconify-icon>
+                            <span class="icon-svg text-xl text-[#7fc890]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/></svg></span>
                         </div>
                         <div class="flex-1">
                             <h3 class="font-playfair font-bold text-[1.125rem] text-[#7fc890]">PLANO
@@ -1063,8 +1052,7 @@
                         class="bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] py-7 px-5 md:px-6 flex flex-col items-center text-center shadow-md hover-card-anim">
                         <div
                             class="w-20 h-20 rounded-full bg-[var(--bg-card-elev)] border-2 border-[var(--accent-primary)] flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(232,183,102,0.15)]">
-                            <iconify-icon icon="solar:check-circle-linear" stroke-width="1.5"
-                                class="text-[2.25rem] text-[var(--accent-primary)]"></iconify-icon>
+                            <span class="icon-svg text-[2.25rem] text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="m8.5 12.5l2 2l5-5"/></g></svg></span>
                         </div>
                         <h3 class="font-playfair font-semibold text-lg text-[var(--accent-primary)] mb-2">Garantia
                             Incondicional de 7 Dias</h3>
@@ -1083,8 +1071,7 @@
                         class="bg-[var(--bg-card)] border border-[var(--border-medium)] rounded-[0.875rem] py-7 px-5 md:px-6 flex flex-col items-center text-center shadow-md hover-card-anim">
                         <div
                             class="w-20 h-20 rounded-full bg-[var(--bg-card-elev)] border-2 border-[var(--accent-primary)] flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(232,183,102,0.15)]">
-                            <iconify-icon icon="solar:chart-2-linear" stroke-width="1.5"
-                                class="text-[2.25rem] text-[var(--accent-primary)]"></iconify-icon>
+                            <span class="icon-svg text-[2.25rem] text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 22h18"/><path d="M3 11c0-.943 0-1.414.293-1.707S4.057 9 5 9s1.414 0 1.707.293S7 10.057 7 11v6c0 .943 0 1.414-.293 1.707S5.943 19 5 19s-1.414 0-1.707-.293S3 17.943 3 17zm7-4c0-.943 0-1.414.293-1.707S11.057 5 12 5s1.414 0 1.707.293S14 6.057 14 7v10c0 .943 0 1.414-.293 1.707S12.943 19 12 19s-1.414 0-1.707-.293S10 17.943 10 17zm7-3c0-.943 0-1.414.293-1.707S18.057 2 19 2s1.414 0 1.707.293S21 3.057 21 4v13c0 .943 0 1.414-.293 1.707S19.943 19 19 19s-1.414 0-1.707-.293S17 17.943 17 17z"/></g></svg></span>
                         </div>
                         <h3 class="font-playfair font-semibold text-lg text-[var(--accent-primary)] mb-2">Garantia de
                             Resultados</h3>
@@ -1129,8 +1116,7 @@
                             class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
                             <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">O Protocolo P3C
                                 serve para qualquer tipo de empresa?</h4>
-                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
-                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                            <span class="icon-svg faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M15 12h-3m0 0H9m3 0V9m0 3v3"/></g></svg></span>
                         </div>
                         <div class="faq-answer px-5 md:px-6">
                             <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
@@ -1146,8 +1132,7 @@
                             class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
                             <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">Preciso de muito
                                 tempo para aplicar?</h4>
-                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
-                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                            <span class="icon-svg faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M15 12h-3m0 0H9m3 0V9m0 3v3"/></g></svg></span>
                         </div>
                         <div class="faq-answer px-5 md:px-6">
                             <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
@@ -1162,8 +1147,7 @@
                             class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
                             <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">E se eu não tiver
                                 capital para investir?</h4>
-                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
-                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                            <span class="icon-svg faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M15 12h-3m0 0H9m3 0V9m0 3v3"/></g></svg></span>
                         </div>
                         <div class="faq-answer px-5 md:px-6">
                             <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
@@ -1180,8 +1164,7 @@
                             class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
                             <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">Quanto tempo leva
                                 para ver os primeiros resultados?</h4>
-                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
-                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                            <span class="icon-svg faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M15 12h-3m0 0H9m3 0V9m0 3v3"/></g></svg></span>
                         </div>
                         <div class="faq-answer px-5 md:px-6">
                             <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
@@ -1197,8 +1180,7 @@
                             class="faq-question py-[1.125rem] px-5 md:px-6 flex justify-between items-center cursor-pointer select-none">
                             <h4 class="text-[0.9375rem] font-semibold text-[var(--text-primary)] pr-4">O acesso é
                                 vitalício?</h4>
-                            <iconify-icon icon="solar:add-linear" stroke-width="1.5"
-                                class="faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"></iconify-icon>
+                            <span class="icon-svg faq-icon text-[1.375rem] text-[var(--accent-primary)] shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M15 12h-3m0 0H9m3 0V9m0 3v3"/></g></svg></span>
                         </div>
                         <div class="faq-answer px-5 md:px-6">
                             <p class="text-sm text-[var(--text-secondary)] leading-[1.75]">
@@ -1234,8 +1216,7 @@
                     class="max-w-[40rem] w-full mt-12 bg-[rgba(224,90,90,0.08)] border border-[rgba(224,90,90,0.3)] rounded-[0.875rem] p-8 text-center transition-all">
                     <div
                         class="w-12 h-12 rounded-full bg-[rgba(224,90,90,0.1)] flex items-center justify-center mx-auto mb-6 border border-[rgba(224,90,90,0.2)]">
-                        <iconify-icon icon="solar:danger-triangle-linear"
-                            class="text-2xl text-[var(--alert-red)]"></iconify-icon>
+                        <span class="icon-svg text-2xl text-[var(--alert-red)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"><path stroke="currentColor" stroke-width="1.5" d="M5.312 10.762C8.23 5.587 9.689 3 12 3s3.77 2.587 6.688 7.762l.364.644c2.425 4.3 3.638 6.45 2.542 8.022S17.786 21 12.364 21h-.728c-5.422 0-8.134 0-9.23-1.572s.117-3.722 2.542-8.022z"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M12 8v5"/><circle cx="12" cy="16" r="1" fill="currentColor"/></g></svg></span>
                     </div>
                     <h3 class="text-xs font-bold tracking-[0.125rem] uppercase text-[var(--alert-red)] mb-6">
                         A REALIDADE É DURA
@@ -1269,8 +1250,7 @@
                     class="max-w-[40rem] w-full mt-8 bg-[var(--bg-card)] border border-[var(--border-soft)] rounded-[0.875rem] p-8 text-center transition-all">
                     <div
                         class="w-12 h-12 rounded-full bg-[rgba(232,183,102,0.1)] flex items-center justify-center mx-auto mb-6 border border-[rgba(232,183,102,0.2)]">
-                        <iconify-icon icon="solar:letter-linear"
-                            class="text-2xl text-[var(--accent-primary)]"></iconify-icon>
+                        <span class="icon-svg text-2xl text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-3.771 0-5.657 1.172-6.828S6.229 4 10 4h4c3.771 0 5.657 0 6.828 1.172S22 8.229 22 12s0 5.657-1.172 6.828S17.771 20 14 20h-4c-3.771 0-5.657 0-6.828-1.172S2 15.771 2 12Z"/><path stroke-linecap="round" d="m6 8l2.159 1.8c1.837 1.53 2.755 2.295 3.841 2.295s2.005-.765 3.841-2.296L18 8"/></g></svg></span>
                     </div>
                     <h3 class="text-xs font-bold tracking-[0.125rem] uppercase text-[var(--accent-primary)] mb-6">
                         MENSAGEM FINAL
@@ -1303,7 +1283,7 @@
                         class="bg-[var(--bg-card)] border border-[rgba(224,90,90,0.3)] rounded-[0.875rem] py-5 px-5 text-left">
                         <div
                             class="w-12 h-12 rounded-full bg-[rgba(224,90,90,0.1)] flex items-center justify-center mb-3 border border-[rgba(224,90,90,0.2)]">
-                            <iconify-icon icon="solar:shop-2-linear" class="text-2xl text-[#e08080]"></iconify-icon>
+                            <span class="icon-svg text-2xl text-[#e08080]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M22 22H2m18 0V11M4 22V11"/><path stroke-linejoin="round" d="M16.528 2H7.472c-1.203 0-1.804 0-2.287.299c-.484.298-.753.836-1.29 1.912L2.49 7.76c-.324.82-.608 1.786-.062 2.479A2 2 0 0 0 6 9a2 2 0 1 0 4 0a2 2 0 1 0 4 0a2 2 0 1 0 4 0a2 2 0 0 0 3.571 1.238c.546-.693.262-1.659-.062-2.479l-1.404-3.548c-.537-1.076-.806-1.614-1.29-1.912C18.332 2 17.731 2 16.528 2Z"/><path stroke-linecap="round" d="M9.5 21.5v-3c0-.935 0-1.402.201-1.75a1.5 1.5 0 0 1 .549-.549C10.598 16 11.065 16 12 16s1.402 0 1.75.201a1.5 1.5 0 0 1 .549.549c.201.348.201.815.201 1.75v3"/></g></svg></span>
                         </div>
                         <h4 class="font-playfair font-bold text-[1rem] text-[#e08080]">A dona da sorveteria</h4>
                         <div
@@ -1319,8 +1299,7 @@
 
                     <div
                         class="bg-[var(--bg-card)] border border-[rgba(63,168,96,0.3)] rounded-[0.875rem] py-5 px-5 text-left">
-                        <span class="text-[2.25rem] leading-none"><iconify-icon icon="solar:confetti-linear"
-                                class="text-[2.25rem] text-[var(--accent-primary)]"></iconify-icon></span>
+                        <span class="text-[2.25rem] leading-none"><span class="icon-svg text-[2.25rem] text-[var(--accent-primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="m4.012 15.762l1.69-5.069c.766-2.298 1.149-3.447 2.055-3.66c.906-.215 1.763.642 3.475 2.355l3.38 3.379c1.712 1.713 2.569 2.569 2.355 3.475s-1.363 1.29-3.661 2.055l-5.069 1.69c-2.765.922-4.148 1.383-4.878.653s-.269-2.113.653-4.878Z"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M12.235 18.346s-.758-2.281-.758-3.79c0-1.51.758-3.792.758-3.792m-4.17 8.72s-.64-2.753-.758-4.55c-.195-2.969.758-7.581.758-7.581m6.445 2.653l.143-.72c.146-.727.67-1.32 1.373-1.554a2.07 2.07 0 0 0 1.372-1.555l.144-.72m.028 7.796l.212.123c.657.38 1.483.296 2.051-.207a1.76 1.76 0 0 1 1.876-.297L22 13M9.795 2.779A1.4 1.4 0 0 0 10 4.5l.097.098c.394.393.539.97.378 1.503"/><path fill="currentColor" d="M6.928 3.94a.536.536 0 1 1 .758.76a.536.536 0 0 1-.758-.76m5.229 3.217a.536.536 0 1 1 .759.759a.536.536 0 0 1-.759-.759m5 3a.536.536 0 1 1 .759.759a.536.536 0 0 1-.759-.759m1.901 5.156a.536.536 0 1 1 .759.759a.536.536 0 0 1-.759-.759"/><path stroke="currentColor" stroke-linejoin="round" d="M19.362 7.714c-.67.67-.19 2.614-.19 2.614s1.944.481 2.614-.19c.71-.71.308-1.64-.786-1.638c.003-1.094-.928-1.496-1.638-.786Z"/><path stroke="currentColor" d="m15.188 3.417l-.027.098c-.03.106-.046.16-.039.212s.036.098.093.189l.053.082c.201.32.302.48.234.611c-.07.131-.262.146-.648.176l-.1.008c-.11.009-.164.013-.212.038s-.084.068-.155.155l-.065.079c-.25.304-.375.456-.518.437s-.21-.198-.341-.555l-.034-.092c-.038-.102-.056-.152-.093-.19c-.037-.036-.088-.055-.189-.092l-.092-.034c-.357-.132-.535-.198-.555-.34c-.02-.144.133-.27.437-.52l.079-.065c.086-.07.13-.106.155-.154s.03-.103.038-.213l.008-.1c.03-.385.045-.578.175-.647c.131-.069.291.032.611.234l.083.052c.09.058.136.086.189.093s.105-.008.212-.038l.097-.027c.376-.107.563-.16.664-.06c.1.1.047.288-.06.663Z"/></g></svg></span></span>
                         <h4 class="font-playfair font-bold text-[1rem] text-[var(--accent-primary)] mt-2">A dona
                             do
                             buffet</h4>
@@ -1353,8 +1332,7 @@
                 <span class="text-[0.8125rem] text-[var(--text-secondary)]">Contato</span>
             </div>
             <p class="text-[0.8125rem] text-[var(--text-muted)] mt-6 flex items-center justify-center">
-                Desenvolvido com <iconify-icon icon="solar:heart-bold"
-                    class="text-[var(--alert-red)] mx-1"></iconify-icon>
+                Desenvolvido com <span class="icon-svg text-[var(--alert-red)] mx-1"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M2 9.137C2 14 6.02 16.591 8.962 18.911C10 19.729 11 20.5 12 20.5s2-.77 3.038-1.59C17.981 16.592 22 14 22 9.138S16.5.825 12 5.501C7.5.825 2 4.274 2 9.137"/></svg></span>
                 para salvar empresas brasileiras.
             </p>
         </footer>
